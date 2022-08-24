@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun App() {
-    SplashScreen()
+    SplashScreen(Modifier)
 }
 
 @Preview(showBackground = true)

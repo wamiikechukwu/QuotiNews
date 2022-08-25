@@ -9,7 +9,8 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import dev.iamwami.app.quotinews.ui.splashscreens.SplashScreen
+import androidx.navigation.compose.rememberNavController
+import dev.iamwami.app.quotinews.ui.navigation.QuotiNewsNavHost
 import dev.iamwami.app.quotinews.ui.theme.QuotiNewsTheme
 
 class MainActivity : ComponentActivity() {
@@ -28,8 +29,16 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun App() {
-    SplashScreen(Modifier)
+    val navController = rememberNavController()
+//    TODO check if Scaffold is needed to hold the NavHost
+
+    QuotiNewsNavHost(
+        navController = navController,
+        modifier = Modifier
+    )
+
 }
+
 
 @Preview(showBackground = true)
 @Composable

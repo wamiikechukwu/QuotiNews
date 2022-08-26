@@ -22,7 +22,9 @@ fun QuotiNewsNavHost(
     ) {
         composable(SplashScreen.route) {
             SplashScreen(
-//                TODO
+                onButtonClick = {
+                    navController.navigate(HomeScreen.route)
+                }
             )
         }
         composable(HomeScreen.route) {

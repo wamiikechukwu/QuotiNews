@@ -6,7 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import dev.iamwami.app.quotinews.ui.home.HomeScreen
-import dev.iamwami.app.quotinews.ui.splashscreens.SplashScreen
+import dev.iamwami.app.quotinews.ui.splashscreens.NavigateToSplashScreen
 import dev.iamwami.app.quotinews.ui.util.HomeScreen
 import dev.iamwami.app.quotinews.ui.util.SplashScreen
 
@@ -21,11 +21,7 @@ fun QuotiNewsNavHost(
         modifier = modifier
     ) {
         composable(SplashScreen.route) {
-            SplashScreen(
-                onButtonClick = {
-                    navController.navigate(HomeScreen.route)
-                }
-            )
+            NavigateToSplashScreen(navController)
         }
         composable(HomeScreen.route) {
             HomeScreen()

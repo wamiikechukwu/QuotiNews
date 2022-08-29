@@ -6,7 +6,7 @@ interface QuotiNewsDestination {
 
 object SplashScreen : QuotiNewsDestination {
     override val route: String
-        get() = "SplashScreen"
+        get() = "NavigateToSplashScreen"
 
 }
 

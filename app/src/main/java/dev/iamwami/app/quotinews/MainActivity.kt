@@ -30,12 +30,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun App() {
     val navController = rememberNavController()
-//    TODO check if Scaffold is needed to hold the NavHost
-
 
     QuotiNewsNavHost(
         navController = navController,
-        modifier = Modifier
     )
 }
 

@@ -1,5 +1,7 @@
 package dev.iamwami.app.quotinews.ui.navigation
 
+import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -18,10 +20,13 @@ fun QuotiNewsNavHost(
     NavHost(
         navController = navController,
         startDestination = SplashScreen.route,
-        modifier = modifier
+        modifier = modifier,
     ) {
         composable(SplashScreen.route) {
             NavigateToSplashScreen(navController)
+//            BackHandler() {
+//                Log.d("testing","back button pressed")
+//            }
         }
         composable(HomeScreen.route) {
             HomeScreen()

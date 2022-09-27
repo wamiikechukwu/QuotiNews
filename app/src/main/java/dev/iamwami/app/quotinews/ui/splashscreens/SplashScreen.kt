@@ -51,7 +51,8 @@ fun SplashScreen(
         modifier = modifier
             .background(Color.LightGray)
             .fillMaxWidth()
-            .fillMaxHeight(),
+            .fillMaxHeight()
+            .padding(10.dp),
 //        Use to specify the arrangement of the layout children (inside the layout)
         verticalArrangement = Arrangement.Center,
 //        use to specify the arrangement of the column within the parent

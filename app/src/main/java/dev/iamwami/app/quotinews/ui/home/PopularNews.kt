@@ -2,9 +2,16 @@ package dev.iamwami.app.quotinews.ui.home
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -65,31 +72,51 @@ fun PopularNews(
             color = Color(0x7C000000)
         )
         Row() {
-            Text(
-                modifier = Modifier.padding(bottom = 8.dp),
-                text = newsData.articles.source.name,
-                style = MaterialTheme.typography.body2,
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1
-            )
+//            For the new publisher name and date published
+            Row(modifier = Modifier.background(Color.Red).height(48.dp)) {
+                Text(
+                    modifier = Modifier.padding(bottom = 8.dp),
+                    text = newsData.articles.source.name,
+                    style = MaterialTheme.typography.body2,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1
+                )
 
-            Text(
-                modifier = Modifier.padding(bottom = 8.dp),
-                text = Formatter.dateFormatter(newsData.articles.post.publishedAt),
-                style = MaterialTheme.typography.body2,
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1
-            )
+                Text(
+                    modifier = Modifier.padding(bottom = 8.dp),
+                    text = Formatter.dateFormatter(newsData.articles.post.publishedAt),
+                    style = MaterialTheme.typography.body2,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1
+                )
+            }
+
+//            For the like and share and option menu icon
+            Row(modifier = Modifier.background(Color.Blue)) {
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(Icons.Filled.Favorite, contentDescription = "Heart icon for favourite news")
+                }
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(Icons.Filled.Share, contentDescription = "Share icon to share the news")
+                }
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(Icons.Filled.Menu, contentDescription = "Option menu")
+                }
+            }
         }
-
-
     }
+
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-@Preview()
+@Preview
 @Composable
-fun PreviewPopularNews(@PreviewParameter(SampleNewsApiDataProvider::class, 1) data: NewsApiResult) {
+fun PreviewPopularNews(
+    @PreviewParameter(
+        SampleNewsApiDataProvider::class,
+        1
+    ) data: NewsApiResult
+) {
     PopularNews(newsData = data)
 }
 

@@ -39,19 +39,19 @@ fun PopularNews(
 ) {
     Column(
         modifier = modifier
-            .requiredWidthIn(min = 250.dp, max = 350.dp)
-            .padding(start = 8.dp, top = 4.dp),
+            .width(350.dp)
+            .padding(start = 12.dp, top = 18.dp),
     ) {
 //            Coil image loader
         AsyncImage(
             model = newsData.articles.post.urlToImage,
             contentDescription = "preview image from the news source",
             modifier = modifier
-                .heightIn(min = 180.dp)
-                .fillMaxWidth()
+                .height(200.dp)
+                .width(350.dp)
                 .clip(shape = MaterialTheme.shapes.medium),
             placeholder = painterResource(id = R.drawable.news_article_image_placeholder_two),
-            contentScale = ContentScale.Fit
+            contentScale = ContentScale.Crop
         )
 //        News title
         Text(
@@ -59,7 +59,7 @@ fun PopularNews(
             text = newsData.articles.post.title,
             style = MaterialTheme.typography.h6,
             overflow = TextOverflow.Ellipsis,
-            maxLines = 2
+            maxLines = 1
         )
 //        News description
         Text(
@@ -75,7 +75,11 @@ fun PopularNews(
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun PopularNewsBottomRow(newsData: NewsApiResult, iconModifier: Modifier = Modifier.height(20.dp), modifier: Modifier = Modifier) {
+fun PopularNewsBottomRow(
+    newsData: NewsApiResult,
+    iconModifier: Modifier = Modifier.height(20.dp),
+    modifier: Modifier = Modifier
+) {
     Row(
         modifier = modifier
             .padding(top = 16.dp)
@@ -86,11 +90,16 @@ fun PopularNewsBottomRow(newsData: NewsApiResult, iconModifier: Modifier = Modif
         Row(
         ) {
             Text(
-                text = newsData.articles.source.name, style = MaterialTheme.typography.body2, overflow = TextOverflow.Ellipsis, maxLines = 1
+                text = newsData.articles.source.name,
+                style = MaterialTheme.typography.body2,
+                overflow = TextOverflow.Ellipsis, maxLines = 1
             )
             Spacer(modifier = modifier.width(8.dp))
             Text(
-                text = Formatter.dateFormatter(newsData.articles.post.publishedAt), style = MaterialTheme.typography.body2, overflow = TextOverflow.Ellipsis, maxLines = 1
+                text = Formatter.dateFormatter(newsData.articles.post.publishedAt),
+                style = MaterialTheme.typography.body2,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1
             )
         }
 

@@ -6,7 +6,7 @@ import dev.iamwami.app.quotinews.model.NewsApiResult
 import dev.iamwami.app.quotinews.model.Post
 import dev.iamwami.app.quotinews.model.Source
 
-object SampleNewsApiDataProvider : PreviewParameterProvider<NewsApiResult> {
+class SampleNewsApiDataProvider : PreviewParameterProvider<NewsApiResult> {
     override val values: Sequence<NewsApiResult> = sequenceOf(
         NewsApiResult(
             status = "ok:200", totalResults = "", articles = Articles(
@@ -15,7 +15,7 @@ object SampleNewsApiDataProvider : PreviewParameterProvider<NewsApiResult> {
                 ), post = Post(
                     urlToImage = "https://appwrite.io/images-ee/1.0/Cover.png",
                     title = "Buhari set to go for 3rd term as president\"",
-                    author = "Wami Ikechukwu",
+                    author = "Wami",
                     description = "Culinary",
                     url = "https://appwrite.io/images-ee/1.0/Cover.png",
                     publishedAt = "",

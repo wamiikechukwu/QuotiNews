@@ -29,7 +29,8 @@ import dev.iamwami.app.quotinews.ui.util.SampleNewsApiDataProvider
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun PopularNews(
-    modifier: Modifier = Modifier, newsData: NewsApiResult
+    modifier: Modifier = Modifier,
+    newsData: NewsApiResult
 ) {
     Column(
         modifier = modifier
@@ -71,7 +72,6 @@ fun PopularNews(
 @Composable
 fun PopularNewsBottomRow(
     newsData: NewsApiResult,
-    iconModifier: Modifier = Modifier.height(20.dp),
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -103,7 +103,7 @@ fun PopularNewsBottomRow(
             IconButton(
                 onClick = {
                     Log.d("icon_buttons", "This is bookmarked")
-                }, modifier = iconModifier
+                }, modifier = modifier.height(20.dp)
             ) {
                 Icon(Icons.Outlined.FavoriteBorder, contentDescription = "Heart icon for favourite news")
             }
@@ -111,7 +111,7 @@ fun PopularNewsBottomRow(
                 onClick = {
                     Log.d("icon_buttons", "This is shared")
 
-                }, modifier = iconModifier
+                }, modifier = modifier.height(20.dp)
             ) {
                 Icon(Icons.Filled.Share, contentDescription = "Share icon to share the news")
             }
@@ -119,7 +119,7 @@ fun PopularNewsBottomRow(
                 onClick = {
                     Log.d("icon_buttons", "checked other options")
 
-                }, modifier = iconModifier
+                }, modifier = modifier.height(20.dp)
             ) {
                 Icon(Icons.Filled.MoreVert, contentDescription = "Option menu")
             }

@@ -4,10 +4,7 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Share
@@ -25,8 +22,8 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import dev.iamwami.app.quotinews.R
 import dev.iamwami.app.quotinews.model.NewsApiResult
+import dev.iamwami.app.quotinews.ui.theme.QuotiNewsTheme
 import dev.iamwami.app.quotinews.ui.util.SampleNewsApiDataProvider
-import dev.iamwami.app.quotinews.util.Formatter
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -84,8 +81,7 @@ fun PopularNewsBottomRow(
         verticalAlignment = Alignment.Bottom,
     ) {
 //            For the new publisher name and date published
-        Row(
-        ) {
+        Row {
             Text(
                 text = newsData.articles.source.name,
                 style = MaterialTheme.typography.body2,
@@ -93,7 +89,7 @@ fun PopularNewsBottomRow(
             )
             Spacer(modifier = modifier.width(8.dp))
             Text(
-                text = Formatter.dateFormatter(newsData.articles.post.publishedAt),
+                text = "dateFormatter(newsData.articles.post.publishedAt)",
                 style = MaterialTheme.typography.body2,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1
@@ -103,8 +99,7 @@ fun PopularNewsBottomRow(
         Spacer(modifier = modifier.width(16.dp))
 
 //            For the like and share and option menu icon
-        Row(
-        ) {
+        Row {
             IconButton(
                 onClick = {
                     Log.d("icon_buttons", "This is bookmarked")
@@ -133,13 +128,17 @@ fun PopularNewsBottomRow(
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-@Preview
+@Preview()
 @Composable
 fun PreviewPopularNews(
     @PreviewParameter(
         SampleNewsApiDataProvider::class, 1
     ) data: NewsApiResult
 ) {
-    PopularNews(newsData = data)
+    QuotiNewsTheme {
+        Surface() {
+            PopularNews(newsData = data)
+        }
+    }
 }
 

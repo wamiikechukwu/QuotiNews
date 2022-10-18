@@ -24,8 +24,6 @@ fun NewsImageSmall(
         model = newsData.articles.post.urlToImage,
         contentDescription = contentDescription,
         modifier = modifier
-            .height(200.dp)
-            .width(350.dp)
             .clip(shape = MaterialTheme.shapes.medium),
         placeholder = painterResource(id = R.drawable.news_article_image_placeholder_two),
         contentScale = ContentScale.Crop

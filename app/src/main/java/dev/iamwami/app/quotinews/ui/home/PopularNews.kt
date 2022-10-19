@@ -4,10 +4,7 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Share
@@ -21,21 +18,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import dev.iamwami.app.quotinews.R
-import dev.iamwami.app.quotinews.model.Articles
 import dev.iamwami.app.quotinews.model.NewsApiResult
-import dev.iamwami.app.quotinews.model.Post
-import dev.iamwami.app.quotinews.model.Source
-import dev.iamwami.app.quotinews.util.Formatter
+import dev.iamwami.app.quotinews.ui.theme.QuotiNewsTheme
+import dev.iamwami.app.quotinews.ui.util.SampleNewsApiDataProvider
 
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun PopularNews(
-    modifier: Modifier = Modifier, newsData: NewsApiResult
+    modifier: Modifier = Modifier,
+    newsData: NewsApiResult
 ) {
     Column(
         modifier = modifier
@@ -77,7 +72,6 @@ fun PopularNews(
 @Composable
 fun PopularNewsBottomRow(
     newsData: NewsApiResult,
-    iconModifier: Modifier = Modifier.height(20.dp),
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -87,8 +81,7 @@ fun PopularNewsBottomRow(
         verticalAlignment = Alignment.Bottom,
     ) {
 //            For the new publisher name and date published
-        Row(
-        ) {
+        Row {
             Text(
                 text = newsData.articles.source.name,
                 style = MaterialTheme.typography.body2,
@@ -96,7 +89,7 @@ fun PopularNewsBottomRow(
             )
             Spacer(modifier = modifier.width(8.dp))
             Text(
-                text = Formatter.dateFormatter(newsData.articles.post.publishedAt),
+                text = "dateFormatter(newsData.articles.post.publishedAt)",
                 style = MaterialTheme.typography.body2,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1
@@ -106,12 +99,11 @@ fun PopularNewsBottomRow(
         Spacer(modifier = modifier.width(16.dp))
 
 //            For the like and share and option menu icon
-        Row(
-        ) {
+        Row {
             IconButton(
                 onClick = {
                     Log.d("icon_buttons", "This is bookmarked")
-                }, modifier = iconModifier
+                }, modifier = modifier.height(20.dp)
             ) {
                 Icon(Icons.Outlined.FavoriteBorder, contentDescription = "Heart icon for favourite news")
             }
@@ -119,7 +111,7 @@ fun PopularNewsBottomRow(
                 onClick = {
                     Log.d("icon_buttons", "This is shared")
 
-                }, modifier = iconModifier
+                }, modifier = modifier.height(20.dp)
             ) {
                 Icon(Icons.Filled.Share, contentDescription = "Share icon to share the news")
             }
@@ -127,7 +119,7 @@ fun PopularNewsBottomRow(
                 onClick = {
                     Log.d("icon_buttons", "checked other options")
 
-                }, modifier = iconModifier
+                }, modifier = modifier.height(20.dp)
             ) {
                 Icon(Icons.Filled.MoreVert, contentDescription = "Option menu")
             }
@@ -136,32 +128,17 @@ fun PopularNewsBottomRow(
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-@Preview
+@Preview()
 @Composable
 fun PreviewPopularNews(
     @PreviewParameter(
         SampleNewsApiDataProvider::class, 1
     ) data: NewsApiResult
 ) {
-    PopularNews(newsData = data)
+    QuotiNewsTheme {
+        Surface() {
+            PopularNews(newsData = data)
+        }
+    }
 }
 
-class SampleNewsApiDataProvider : PreviewParameterProvider<NewsApiResult> {
-    override val values: Sequence<NewsApiResult> = sequenceOf(
-        NewsApiResult(
-            status = "ok:200", totalResults = "", articles = Articles(
-                source = Source(
-                    id = "", name = ""
-                ), post = Post(
-                    urlToImage = "https://appwrite.io/images-ee/1.0/Cover.png",
-                    title = "Buhari set to go for 3rd term as president\"",
-                    author = "Wami Ikechukwu",
-                    description = "Culinary",
-                    url = "https://appwrite.io/images-ee/1.0/Cover.png",
-                    publishedAt = "",
-                    content = ""
-                )
-            )
-        )
-    )
-}

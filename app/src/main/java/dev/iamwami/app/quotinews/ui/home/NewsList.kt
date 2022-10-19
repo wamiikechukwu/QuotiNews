@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import dev.iamwami.app.quotinews.model.NewsApiResult
 import dev.iamwami.app.quotinews.ui.components.NewsImageSmall
 import dev.iamwami.app.quotinews.ui.util.SampleNewsApiDataProvider
-import dev.iamwami.app.quotinews.util.Formatter
+import dev.iamwami.app.quotinews.util.dateFormatter
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -51,7 +51,7 @@ fun NewsListTextBody(modifier: Modifier = Modifier, data: NewsApiResult) {
             Spacer(modifier = modifier.width(20.dp))
             Text(
                 style = MaterialTheme.typography.body2,
-                text = Formatter.dateFormatter(data.articles.post.publishedAt)
+                text = dateFormatter(data.articles.post.publishedAt)
             )
         }
     }

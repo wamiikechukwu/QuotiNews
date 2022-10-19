@@ -7,9 +7,8 @@ import java.time.format.DateTimeFormatter
 
 @RequiresApi(Build.VERSION_CODES.O)
 
-object Formatter {
-    fun dateFormatter(date: String): String {
-        val oldDate = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
-        return LocalDate.parse(date, oldDate).toString()
-    }
+fun dateFormatter(date: String): String {
+    val oldDate = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+    return LocalDate.parse(date, oldDate).toString()
+
 }

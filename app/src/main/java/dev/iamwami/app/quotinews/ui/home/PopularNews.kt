@@ -21,21 +21,24 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import dev.iamwami.app.quotinews.R
-import dev.iamwami.app.quotinews.model.NewsApiResult
+import dev.iamwami.app.quotinews.model.News
 import dev.iamwami.app.quotinews.ui.theme.QuotiNewsTheme
 import dev.iamwami.app.quotinews.ui.util.SampleNewsApiDataProvider
+import dev.iamwami.app.quotinews.util.dateFormatter
 
-
+/**
+ * A single UI for the popular news card
+ * */
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun PopularNews(
     modifier: Modifier = Modifier,
-    newsData: NewsApiResult
+    newsData: News
 ) {
     Column(
         modifier = modifier
             .width(350.dp)
-            .padding(start = 12.dp, top = 18.dp),
+            .padding(start = 12.dp),
     ) {
 //            Coil image loader
         AsyncImage(
@@ -63,68 +66,62 @@ fun PopularNews(
             overflow = TextOverflow.Ellipsis,
             maxLines = 2,
         )
-        PopularNewsBottomRow(newsData)
-    }
-
-}
-
-@RequiresApi(Build.VERSION_CODES.O)
-@Composable
-fun PopularNewsBottomRow(
-    newsData: NewsApiResult,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier
-            .padding(top = 16.dp)
-            .fillMaxWidth(),
-        verticalAlignment = Alignment.Bottom,
-    ) {
+//        Icons row
+        Row(
+            modifier = modifier
+                .padding(top = 16.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.Bottom,
+        ) {
 //            For the new publisher name and date published
-        Row {
-            Text(
-                text = newsData.articles.source.name,
-                style = MaterialTheme.typography.body2,
-                overflow = TextOverflow.Ellipsis, maxLines = 1
-            )
-            Spacer(modifier = modifier.width(8.dp))
-            Text(
-                text = "dateFormatter(newsData.articles.post.publishedAt)",
-                style = MaterialTheme.typography.body2,
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1
-            )
-        }
+            Row {
+                Text(
+                    text = newsData.articles.source.name,
+                    style = MaterialTheme.typography.body2,
+                    overflow = TextOverflow.Ellipsis, maxLines = 1
+                )
+                Spacer(modifier = modifier.width(8.dp))
+                Text(
+                    /**
+                     *TODO uncomment the date formatter
+                     **/
+                    text = dateFormatter(newsData.articles.post.publishedAt),
+                    style = MaterialTheme.typography.body2,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1
+                )
+            }
 
-        Spacer(modifier = modifier.width(16.dp))
+            Spacer(modifier = modifier.width(16.dp))
 
 //            For the like and share and option menu icon
-        Row {
-            IconButton(
-                onClick = {
-                    Log.d("icon_buttons", "This is bookmarked")
-                }, modifier = modifier.height(20.dp)
-            ) {
-                Icon(Icons.Outlined.FavoriteBorder, contentDescription = "Heart icon for favourite news")
-            }
-            IconButton(
-                onClick = {
-                    Log.d("icon_buttons", "This is shared")
+            Row {
+                IconButton(
+                    onClick = {
+                        Log.d("icon_buttons", "This is bookmarked")
+                    }, modifier = modifier.height(20.dp)
+                ) {
+                    Icon(Icons.Outlined.FavoriteBorder, contentDescription = "Heart icon for favourite news")
+                }
+                IconButton(
+                    onClick = {
+                        Log.d("icon_buttons", "This is shared")
 
-                }, modifier = modifier.height(20.dp)
-            ) {
-                Icon(Icons.Filled.Share, contentDescription = "Share icon to share the news")
-            }
-            IconButton(
-                onClick = {
-                    Log.d("icon_buttons", "checked other options")
+                    }, modifier = modifier.height(20.dp)
+                ) {
+                    Icon(Icons.Filled.Share, contentDescription = "Share icon to share the news")
+                }
+                IconButton(
+                    onClick = {
+                        Log.d("icon_buttons", "checked other options")
 
-                }, modifier = modifier.height(20.dp)
-            ) {
-                Icon(Icons.Filled.MoreVert, contentDescription = "Option menu")
+                    }, modifier = modifier.height(20.dp)
+                ) {
+                    Icon(Icons.Filled.MoreVert, contentDescription = "Option menu")
+                }
             }
-        }
-    }
+        }    }
+
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -133,7 +130,7 @@ fun PopularNewsBottomRow(
 fun PreviewPopularNews(
     @PreviewParameter(
         SampleNewsApiDataProvider::class, 1
-    ) data: NewsApiResult
+    ) data: News
 ) {
     QuotiNewsTheme {
         Surface() {

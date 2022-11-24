@@ -1,6 +1,6 @@
 package dev.iamwami.app.quotinews.model
 
-data class NewsApiResult(
+data class News(
     val status: String,
     val totalResults: String,
     val articles: Articles

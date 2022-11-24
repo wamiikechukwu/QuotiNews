@@ -2,13 +2,13 @@ package dev.iamwami.app.quotinews.ui.util
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import dev.iamwami.app.quotinews.model.Articles
-import dev.iamwami.app.quotinews.model.NewsApiResult
+import dev.iamwami.app.quotinews.model.News
 import dev.iamwami.app.quotinews.model.Post
 import dev.iamwami.app.quotinews.model.Source
 
-class SampleNewsApiDataProvider : PreviewParameterProvider<NewsApiResult> {
-    override val values: Sequence<NewsApiResult> = sequenceOf(
-        NewsApiResult(
+class SampleNewsApiDataProvider : PreviewParameterProvider<News> {
+    override val values: Sequence<News> = sequenceOf(
+        News(
             status = "ok:200", totalResults = "", articles = Articles(
                 source = Source(
                     id = "", name = ""

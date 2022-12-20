@@ -7,25 +7,22 @@ import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
 import retrofit2.HttpException
 import java.io.IOException
-import kotlin.coroutines.startCoroutine
 
-suspend fun <T> SafeApiCall(
-    dispatcher: CoroutineDispatcher,
-    apiCall: suspend () -> T,
-    retry: Boolean = false,
-    retry_max: Int = 10,
-    retry_delay: Long = 3000
+suspend fun <T> safeApiCall(
+    coroutineDispatcher: CoroutineDispatcher,
+    apiCallFunction: suspend () -> T,
+    shouldApiCallBeRetried: Boolean = false,
+    maximumRetries: Int = 10,
+    apiCallDelayedBy: Long = 3000
 ): ResultWrapper<T> {
-    return withContext(dispatcher) {
-        var count = if (retry) retry_max else 1
-        var response: ResultWrapper<T> = ResultWrapper.Loading(data = null)
-//        TODO set log to see that the response will return
+    return withContext(coroutineDispatcher) {
+        var count = if (shouldApiCallBeRetried) maximumRetries else 1
+        var response: ResultWrapper<T> = ResultWrapper.Loading(data = null, message = "api call is loading")
 
         while (count > 0) {
 
             try {
-                Log.d("testing", "calling sus func $apiCall")
-                response = ResultWrapper.Success(apiCall.invoke())
+                response = ResultWrapper.Success(data = apiCallFunction.invoke(), code = 200, message = "api call was successful")
                 return@withContext response // break out of loop on success
             } catch (throwable: Throwable) {
                 Log.d("testing", "catch an error $throwable")
@@ -43,10 +40,9 @@ suspend fun <T> SafeApiCall(
                         ResultWrapper.Error<T>(code = null, message = throwable.toString())
                     }
                 }
-                delay(retry_delay)
+                delay(apiCallDelayedBy)
                 count--
             }
-
         }
         response
     }

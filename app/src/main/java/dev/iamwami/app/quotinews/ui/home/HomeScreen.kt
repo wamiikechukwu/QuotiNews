@@ -2,109 +2,200 @@ package dev.iamwami.app.quotinews.ui.home
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import dev.iamwami.app.quotinews.model.Articles
-import dev.iamwami.app.quotinews.model.NewsApiResult
-import dev.iamwami.app.quotinews.model.Post
-import dev.iamwami.app.quotinews.model.Source
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import dev.iamwami.app.quotinews.model.News
+import dev.iamwami.app.quotinews.model.NewsFeed
+import dev.iamwami.app.quotinews.model.mockNewsFeed
+import dev.iamwami.app.quotinews.ui.util.LoadingIndicator
 
+
+/**
+ *Home feed screen displaying just the article feed
+ * */
 @RequiresApi(Build.VERSION_CODES.O)
-@Preview
 @Composable
-fun HomeScreen() {
-    val popularNewsList = mutableListOf<NewsApiResult>(
-        NewsApiResult(
-            status = "ok:200",
-            totalResults = "",
-            articles = Articles(
-                source = Source(
-                    id = "",
-                    name = "Bloomberg News"
-                ),
-                post = Post(
-                    urlToImage = "https://responsive.fxempire.com/width/600/webp-lossy-70.q50/_fxempire_/2022/10/tagreuters.com2022newsml_LYNXMPEI980781.jpg",
-                    title = "Buhari set to go for 3rd term as president klsjalkjd oja jkladi hkaloidh",
-                    author = "Wami Ikechukwu",
-                    description = "BP and Hertz want to make electric vehicle charging an easier, more" +
-                            " enjoyable experience for their customers, " +
-                            "car renters, and the general public. " +
-                            "Continue reading at TweakTown ",
-                    url = "https://appwrite.io/images-ee/1.0/Cover.png",
-                    publishedAt = "2022-09-29T04:28:47Z",
-                    content = ""
-                )
+fun HomeFeedScreenWithNewsList(
+    uiState: HomeUiState,
+    newsFeed: NewsFeed,
+    onToggleLikeButton: (String) -> Unit,
+    onSelectNews: (String) -> Unit,
+    showTopAppBar: Boolean,
+    onRefreshNews: () -> Unit,
+    onErrorDismissed: (Long) -> Unit,
+    scaffoldState: ScaffoldState,
+    modifier: Modifier = Modifier,
+    hasNewsContents: @Composable (
+        uiState: HomeUiState.HasPost,
+        modifier: Modifier
+    ) -> Unit
+) {
+    Scaffold(
+        modifier = modifier,
+        scaffoldState = scaffoldState,
+        topBar = {
+            TopAppBar(
+                modifier = modifier,
+                title = {},
+                navigationIcon = {},
+                actions = {},
             )
-        ),
-        NewsApiResult(
-            status = "ok:200",
-            totalResults = "",
-            articles = Articles(
-                source = Source(
-                    id = "",
-                    name = "CNN News"
-                ),
-                post = Post(
-                    urlToImage = "https://cleantechnica.com/files/2018/07/comma-ai-adds-driver-monitoring.jpg",
-                    title = "Nigeria is one kind of country",
-                    author = "Vivian",
-                    description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    url = "https://appwrite.io/images-ee/1.0/Cover.png",
-                    publishedAt = "2022-10-27T04:00:47Z",
-                    content = ""
-                )
-            )
-        ),
-        NewsApiResult(
-            status = "ok:200",
-            totalResults = "",
-            articles = Articles(
-                source = Source(
-                    id = "",
-                    name = "BBC News"
-                ),
-                post = Post(
-                    urlToImage = "https://cdn.decrypt.co/resize/1024/height/512/wp-content/uploads/2022/10/Celsius-shutterstock_2171884823-16x9-1-gID_1.png",
-                    title = "Flooding happening all around the world and Nigeria is literal flooded",
-                    author = "Zamboki lelee",
-                    description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    url = "https://appwrite.io/images-ee/1.0/Cover.png",
-                    publishedAt = "2022-10-27T04:00:47Z",
-                    content = ""
-                )
-            )
-        ),
-        NewsApiResult(
-            status = "ok:200",
-            totalResults = "",
-            articles = Articles(
-                source = Source(
-                    id = "",
-                    name = "Aljeersa News"
-                ),
-                post = Post(
-                    urlToImage = "https://imageio.forbes.com/specials-images/imageserve/6341b2021d939b4e05d6637c/0x0.jpg?format=jpg&width=1200",
-                    title = "USA is a hell of a country but well it has a good economy",
-                    author = "Vivian",
-                    description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    url = "https://appwrite.io/images-ee/1.0/Cover.png",
-                    publishedAt = "2022-10-27T04:00:47Z",
-                    content = ""
-                )
-            )
-        )
-    )
-
-
-    LazyRow() {
-        items(popularNewsList.toList()) { data ->
-            PopularNews(
-                newsData = data
-            )
-        }
-
+        },
+        bottomBar = {},
+        floatingActionButton = {},
+    ) { innerPadding ->
+        val innerContentModifier = modifier.padding(innerPadding)
+        LoadingContent(
+            empty = when (uiState) {
+                is HomeUiState.HasPost -> false
+                is HomeUiState.NoPost -> uiState.isLoading
+            }, emptyContent = { LoadingIndicator() },
+            loading = uiState.isLoading,
+            onRefresh = { onRefreshNews },
+            content = {
+                when (uiState) {
+                    is HomeUiState.HasPost -> hasNewsContents(uiState, innerContentModifier)
+                    is HomeUiState.NoPost -> {
+                        if (uiState.errorMessage.isEmpty()) {
+                            // if there are no posts, and no error, let the user refresh manually
+                            TextButton(
+                                onClick = onRefreshNews,
+                                modifier.fillMaxSize()
+                            ) {
+                                Text(
+                                    text = "Tap to load content",
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                        } else {
+                            // there's currently an error showing, don't show any content
+                            Box(innerContentModifier.fillMaxSize()) { /* empty screen */ }
+                        }
+                    }
+                }
+            })
 
     }
+
+    // Process one error message at a time and show them as Snackbars in the UI
+    if (uiState.errorMessage.isEmpty()) {
+// Remember the error message to display on the screen.
+        val errorMessage = remember(uiState) {
+            uiState.errorMessage[0]
+        }
+
+        // Get the text to show on the message from resources
+        val errorMessageText: String = errorMessage.errorMessage
+        val retryMessageText = "Retry"
+
+        // If onRefreshPosts or onErrorDismiss change while the LaunchedEffect is running,
+        // don't restart the effect and use the latest lambda values.
+        val onRefreshPostsState by rememberUpdatedState(onRefreshNews)
+        val onErrorDismissState by rememberUpdatedState(onErrorDismissed)
+
+        // Effect running in a coroutine that displays the Snackbar on the screen
+        // If there's a change to errorMessageText, retryMessageText or scaffoldState,
+        // the previous effect will be cancelled and a new one will start with the new values
+        LaunchedEffect(key1 = errorMessageText, key2 = retryMessageText, key3 = scaffoldState, block = {
+            val snackbarState = scaffoldState.snackbarHostState.showSnackbar(
+                message = errorMessageText,
+                actionLabel = retryMessageText
+            )
+
+            if (snackbarState == SnackbarResult.ActionPerformed) {
+                onRefreshPostsState()
+            }
+            // Once the message is displayed and dismissed, notify the ViewModel
+            onErrorDismissState(errorMessage.id)
+        })
+    }
 }
+
+
+@RequiresApi(Build.VERSION_CODES.O)
+@Composable
+fun NewsList(
+    newsFeed: NewsFeed,
+    onToggleFavourite: (Int) -> Unit,
+    isFavourite: Set<Int>,
+    onArticleTap: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
+    state: LazyListState = rememberLazyListState(),
+) {
+    LazyColumn(
+        modifier = modifier,
+        contentPadding = contentPadding,
+        state = state,
+    ) {
+        item {
+            if (newsFeed.popularNews.isNotEmpty()) {
+                PopularNewsSection(
+                    newsDataList = newsFeed.popularNews,
+                    isFavourite = isFavourite,
+                    onFavouriteToggle = onToggleFavourite
+                )
+            }
+            if (newsFeed.normalNews.isNotEmpty()) {
+                NormalNewsSection(
+                    newsData = newsFeed.normalNews,
+                    navigateToArticle = onArticleTap,
+                    onToggleFavourite = {}
+                )
+            }
+        }
+    }
+}
+
+//---
+@RequiresApi(Build.VERSION_CODES.O)
+@Composable
+fun HomeScreenWithArticleDetailsScreen(
+    uiState: HomeUiState,
+    showTopAppBar: Boolean,
+    onToggleFavourite: (Int) -> Unit,
+    onSelectNews: (String) -> Unit,
+    onRefreshNews: () -> Unit,
+    onErrorDismissed: (Long) -> Unit,
+    openDrawer: () -> Unit,
+    scaffoldState: ScaffoldState,
+    modifier: Modifier = Modifier,
+    onSearchInputChanged: () -> Unit
+) {
+    HomeFeedScreenWithNewsList(
+        newsFeed = mockNewsFeed,
+        onToggleLikeButton = {},
+        onSelectNews = {},
+        onRefreshNews = {},
+        uiState = uiState,
+        showTopAppBar = showTopAppBar,
+        onErrorDismissed = onErrorDismissed,
+        scaffoldState = scaffoldState,
+        modifier = modifier,
+        hasNewsContents = { hasUiState, contentModifier ->
+
+        })
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+@Composable
+fun NewsListHomeScreen(newsDataList: List<News>) {
+    LazyColumn() {
+        items(newsDataList) { newsData ->
+//            NewsList(newsData = popularNewsList[0])
+
+        }
+    }
+}
+

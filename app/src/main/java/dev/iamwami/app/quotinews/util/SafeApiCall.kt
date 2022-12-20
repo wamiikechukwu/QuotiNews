@@ -1,11 +1,13 @@
 package dev.iamwami.app.quotinews.util
 
+import android.util.Log
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
 import retrofit2.HttpException
 import java.io.IOException
+import kotlin.coroutines.startCoroutine
 
 suspend fun <T> SafeApiCall(
     dispatcher: CoroutineDispatcher,
@@ -22,10 +24,11 @@ suspend fun <T> SafeApiCall(
         while (count > 0) {
 
             try {
+                Log.d("testing", "calling sus func $apiCall")
                 response = ResultWrapper.Success(apiCall.invoke())
                 return@withContext response // break out of loop on success
             } catch (throwable: Throwable) {
-//                Log.d("SAFEAPICALL ERROR", throwable.toString())
+                Log.d("testing", "catch an error $throwable")
                 response = when (throwable) {
 
                     is IOException -> ResultWrapper.Error<T>(code = null, message = throwable.toString())

@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.iamwami.app.quotinews.model.News
 import dev.iamwami.app.quotinews.model.NewsFeed
-import dev.iamwami.app.quotinews.model.TestingNews
 import dev.iamwami.app.quotinews.network.repo.RemoteNewsRepository
 import dev.iamwami.app.quotinews.util.ErrorMessage
 import dev.iamwami.app.quotinews.util.ResultWrapper
@@ -35,7 +34,7 @@ sealed interface HomeUiState {
 
 private class HomeViewModelState(
     val newsFeed: NewsFeed? = null,
-    val selectedNewsId: Int? = null,
+    val selectedNewsId: String? = null,
     val isArticleOpen: Boolean = false,
     val favourite: Set<String> = emptySet(),
     val isLoading: Boolean = false,
@@ -57,7 +56,7 @@ private class HomeViewModelState(
                 searchInput = searchInput,
                 newsFeed = newsFeed,
                 selectedNews = newsFeed.allNews.find {
-                    it.articles.post.id == selectedNewsId
+                    it.articles[0].source.id == selectedNewsId
                 } ?: newsFeed.normalNews[0],
                 isArticleOpen = isArticleOpen,
                 favourite = favourite
@@ -69,9 +68,9 @@ private class HomeViewModelState(
 
 class HomeViewModel() : ViewModel() {
 
-    fun testing(): List<TestingNews> {
+    fun testing(): List<News> {
 
-        val theList = mutableListOf<TestingNews>()
+        val theList = mutableListOf<News>()
         viewModelScope.launch {
 //            try {
             val response = RemoteNewsRepository().getNews()

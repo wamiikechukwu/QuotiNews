@@ -26,7 +26,7 @@ fun NewsImageSmall(
     contentDescription: String = "preview image from the news source"
 ) {
     AsyncImage(
-        model = newsData.articles.post.urlToImage,
+        model = newsData.articles[0].urlToImage,
         contentDescription = contentDescription,
         modifier = modifier
             .clip(shape = MaterialTheme.shapes.medium),

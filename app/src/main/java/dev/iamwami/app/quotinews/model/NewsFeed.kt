@@ -7,6 +7,12 @@ data class NewsFeed(
     val highlightedNews: List<News>,
     val recommendedNews: List<News>,
     val normalNews: List<News>
-)
+) {
+
+    /**
+     * Returns a list of all other news
+     * */
+    val allNews: List<News> = popularNews + highlightedNews + recommendedNews + normalNews
+}
 
 

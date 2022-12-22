@@ -38,7 +38,7 @@ fun NormalNews(
         )
         Column(modifier = modifier.weight(1f)) {
             Text(
-                text = newsData.articles.post.title,
+                text = newsData.articles[0].title,
                 style = MaterialTheme.typography.subtitle1,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
@@ -46,12 +46,12 @@ fun NormalNews(
             Row(modifier = modifier.padding(top = 8.dp)) {
                 Text(
                     style = MaterialTheme.typography.body2,
-                    text = newsData.articles.post.author,
+                    text = newsData.articles[0].author,
                 )
                 Spacer(modifier = modifier.width(24.dp))
                 Text(
                     style = MaterialTheme.typography.body2,
-                    text = dateFormatter(newsData.articles.post.publishedAt)
+                    text = dateFormatter(newsData.articles[0].publishedAt)
                 )
             }
         }

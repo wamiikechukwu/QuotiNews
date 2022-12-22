@@ -2,21 +2,12 @@ package dev.iamwami.app.quotinews.model
 
 data class News(
     val status: String,
-    val totalResults: String,
-    val articles: Articles
+    val totalResults: Int,
+    val articles: List<Articles>
 )
 
 data class Articles(
     val source: Source,
-    val post: Post
-)
-
-data class Source(
-    val id: String,
-    val name: String
-)
-
-data class Post(
     val urlToImage: String,
     val title: String,
     val author: String,
@@ -25,3 +16,9 @@ data class Post(
     val publishedAt: String,
     val content: String
 )
+
+data class Source(
+    val id: String,
+    val name: String
+)
+

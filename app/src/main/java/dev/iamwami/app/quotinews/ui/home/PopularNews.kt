@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.outlined.FavoriteBorder
@@ -33,6 +34,8 @@ import dev.iamwami.app.quotinews.util.dateFormatter
 @Composable
 fun PopularNews(
     modifier: Modifier = Modifier,
+    isIconBookmarked: Boolean,
+    iconClicked: () -> Unit,
     newsData: News
 ) {
     Column(
@@ -42,7 +45,7 @@ fun PopularNews(
     ) {
 //            Coil image loader
         AsyncImage(
-            model = newsData.articles.post.urlToImage,
+            model = newsData.articles[0].urlToImage,
             contentDescription = "preview image from the news source",
             modifier = modifier
                 .height(200.dp)
@@ -54,14 +57,14 @@ fun PopularNews(
 //        News title
         Text(
             modifier = Modifier.padding(top = 16.dp, bottom = 8.dp),
-            text = newsData.articles.post.title,
+            text = newsData.articles[0].title,
             style = MaterialTheme.typography.h6,
             overflow = TextOverflow.Ellipsis,
             maxLines = 1
         )
 //        News description
         Text(
-            text = newsData.articles.post.description,
+            text = newsData.articles[0].description,
             style = MaterialTheme.typography.body2,
             overflow = TextOverflow.Ellipsis,
             maxLines = 2,
@@ -76,7 +79,7 @@ fun PopularNews(
 //            For the new publisher name and date published
             Row {
                 Text(
-                    text = newsData.articles.source.name,
+                    text = newsData.articles[0].source.name,
                     style = MaterialTheme.typography.body2,
                     overflow = TextOverflow.Ellipsis, maxLines = 1
                 )
@@ -85,7 +88,7 @@ fun PopularNews(
                     /**
                      *TODO uncomment the date formatter
                      **/
-                    text = dateFormatter(newsData.articles.post.publishedAt),
+                    text = dateFormatter(newsData.articles[0].publishedAt),
                     style = MaterialTheme.typography.body2,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1
@@ -96,12 +99,16 @@ fun PopularNews(
 
 //            For the like and share and option menu icon
             Row {
-                IconButton(
-                    onClick = {
-                        Log.d("icon_buttons", "This is bookmarked")
-                    }, modifier = modifier.height(20.dp)
+
+                IconToggleButton(
+                    checked = isIconBookmarked,
+                    onCheckedChange = { iconClicked() },
+                    modifier = modifier.height(20.dp)
+//                    onClick = {
+//                        Log.d("icon_buttons", "This is bookmarked")
+//                    }
                 ) {
-                    Icon(Icons.Outlined.FavoriteBorder, contentDescription = "Heart icon for favourite news")
+                    Icon(if (isIconBookmarked) Icons.Outlined.FavoriteBorder else Icons.Filled.FavoriteBorder, contentDescription = "Heart icon for favourite news")
                 }
                 IconButton(
                     onClick = {
@@ -120,7 +127,8 @@ fun PopularNews(
                     Icon(Icons.Filled.MoreVert, contentDescription = "Option menu")
                 }
             }
-        }    }
+        }
+    }
 
 }
 
@@ -134,7 +142,9 @@ fun PreviewPopularNews(
 ) {
     QuotiNewsTheme {
         Surface() {
-            PopularNews(newsData = data)
+            PopularNews(newsData = data,
+                isIconBookmarked = false,
+                iconClicked = {})
         }
     }
 }

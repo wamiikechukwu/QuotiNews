@@ -127,8 +127,8 @@ fun HomeFeedScreenWithNewsList(
 @Composable
 fun NewsList(
     newsFeed: NewsFeed,
-    onToggleFavourite: (Int) -> Unit,
-    isFavourite: Set<Int>,
+    onToggleFavourite: (String) -> Unit,
+    isFavourite: Set<String>,
     onArticleTap: (String) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),

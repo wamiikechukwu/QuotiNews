@@ -71,8 +71,8 @@ private class HomeViewModelState(
 
 class HomeViewModel() : ViewModel() {
 
-    private var _newsResult: MutableStateFlow<News?> = MutableStateFlow(null)
-    val newsResult: StateFlow<News?> = _newsResult
+    private var _newsResult: MutableStateFlow<ResultWrapper<News>?> = MutableStateFlow(null)
+    val newsResult: StateFlow<ResultWrapper<News>?> = _newsResult
 
     private fun getAllAvailableNews(){
 
@@ -82,13 +82,13 @@ class HomeViewModel() : ViewModel() {
 
             when (response) {
                 is ResultWrapper.Loading -> {
-                    _newsResult.value = response.data
+                    _newsResult.value = response
                 }
                 is ResultWrapper.Error -> {
-                    _newsResult.value = response.data
+                    _newsResult.value = response
                 }
                 is ResultWrapper.Success -> {
-                    _newsResult.value = response.data
+                    _newsResult.value = response
                 }
             }
         }

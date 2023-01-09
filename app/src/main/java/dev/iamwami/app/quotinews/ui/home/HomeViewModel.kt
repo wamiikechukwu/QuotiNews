@@ -8,6 +8,9 @@ import dev.iamwami.app.quotinews.model.NewsFeed
 import dev.iamwami.app.quotinews.network.repo.RemoteNewsRepository
 import dev.iamwami.app.quotinews.util.ErrorMessage
 import dev.iamwami.app.quotinews.util.ResultWrapper
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 
 sealed interface HomeUiState {
@@ -56,7 +59,7 @@ private class HomeViewModelState(
                 searchInput = searchInput,
                 newsFeed = newsFeed,
                 selectedNews = newsFeed.allNews.find {
-                    it.articles[0].source.id == selectedNewsId
+                    (it.articles?.get(0)?.source?.id ?: it) == selectedNewsId
                 } ?: newsFeed.normalNews[0],
                 isArticleOpen = isArticleOpen,
                 favourite = favourite
@@ -68,35 +71,31 @@ private class HomeViewModelState(
 
 class HomeViewModel() : ViewModel() {
 
-    fun testing(): List<News> {
+    private var _newsResult: MutableStateFlow<News?> = MutableStateFlow(null)
+    val newsResult: StateFlow<News?> = _newsResult
 
-        val theList = mutableListOf<News>()
+    private fun getAllAvailableNews(){
+
         viewModelScope.launch {
-//            try {
+
             val response = RemoteNewsRepository().getNews()
-//            Log.d("testing", "view model called with ${i}")
+
             when (response) {
                 is ResultWrapper.Loading -> {
-                    Log.d("testing", "loading result ${response.data}")
+                    _newsResult.value = response.data
                 }
                 is ResultWrapper.Error -> {
-                    Log.d("testing", "error result ${response.data}")
+                    _newsResult.value = response.data
                 }
                 is ResultWrapper.Success -> {
-                    Log.d("testing", "success result ${response.data}")
-
+                    _newsResult.value = response.data
                 }
             }
-//            theList.add(i)
-//            } catch (e: Exception) {
-//                Log.d("testing", "prevented app from crashing possible reason $e")
-//            }
         }
-        return theList
     }
 
     init {
-        testing()
+        getAllAvailableNews()
     }
 
 }

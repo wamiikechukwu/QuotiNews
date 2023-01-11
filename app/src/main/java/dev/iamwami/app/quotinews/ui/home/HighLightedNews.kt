@@ -30,7 +30,7 @@ fun HighLightedNews(
 ) {
     Column() {
         AsyncImage(
-            model = newsData.articles[0].urlToImage,
+            model = newsData.articles?.get(0)?.urlToImage,
             contentDescription = "preview image from the news source",
             modifier = modifier
                 .height(100.dp)
@@ -40,18 +40,22 @@ fun HighLightedNews(
             contentScale = ContentScale.Crop
         )
         Column(modifier = modifier.padding(16.dp)) {
-            Text(
-                text = newsData.articles[0].title,
-                style = MaterialTheme.typography.h6,
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1
-            )
-            Text(
-                text = newsData.articles[0].source.name,
-                style = MaterialTheme.typography.body2,
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1
-            )
+            newsData.articles?.get(0)?.let {
+                Text(
+                    text = it.title,
+                    style = MaterialTheme.typography.h6,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1
+                )
+            }
+            newsData.articles?.get(0)?.source?.let {
+                Text(
+                    text = it.name,
+                    style = MaterialTheme.typography.body2,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1
+                )
+            }
             Text(
                 /**
                  *TODO uncomment the date formatter

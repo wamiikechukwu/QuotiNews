@@ -29,10 +29,12 @@ fun PopularNewsSection(
         )
         LazyRow() {
             items(newsDataList) { newsData ->
-                PopularNews(
-                    newsData = newsData,
-                    isIconBookmarked = isFavourite.contains(newsData.articles[0].source.id),
-                    iconClicked = { onFavouriteToggle(newsData.articles[0].source.id) })
+                newsData.articles?.get(0)?.source?.let { isFavourite.contains(it.id) }?.let {
+                    PopularNews(
+                        newsData = newsData,
+                        isIconBookmarked = it,
+                        iconClicked = { newsData.articles[0]?.source?.let { onFavouriteToggle(it.id) } })
+                }
             }
         }
         PostDivider()

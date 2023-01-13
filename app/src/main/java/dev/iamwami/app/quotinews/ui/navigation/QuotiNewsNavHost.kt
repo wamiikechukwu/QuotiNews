@@ -31,9 +31,10 @@ fun QuotiNewsNavHost(
             NavigateToSplashScreen(navController)
         }
         composable(HomeScreen.route) {
-            val viewMode:HomeViewModel? = null
+//            TODO is this the right way to pass in the view model
+            val viewMode = HomeViewModel()
             HomeRoute(
-                viewModel = viewMode,
+                homeViewModel = viewMode,
                 openDrawer = { },
                 navController = navController
             )

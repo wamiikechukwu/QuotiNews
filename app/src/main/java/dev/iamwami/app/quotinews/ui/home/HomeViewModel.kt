@@ -39,7 +39,8 @@ class HomeViewModel() : ViewModel() {
     }
 
     init {
-        getAllAvailableNews()
+//        Uncomment to start making API calls
+//        getAllAvailableNews()
     }
 
 }

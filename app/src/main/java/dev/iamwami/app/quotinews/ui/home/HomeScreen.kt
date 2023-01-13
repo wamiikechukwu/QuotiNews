@@ -2,9 +2,7 @@ package dev.iamwami.app.quotinews.ui.home
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -13,12 +11,8 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import dev.iamwami.app.quotinews.model.News
 import dev.iamwami.app.quotinews.model.NewsFeed
-import dev.iamwami.app.quotinews.model.mockNewsFeed
-import dev.iamwami.app.quotinews.ui.util.LoadingIndicator
 
 
 /**
@@ -37,31 +31,24 @@ fun HomeFeedScreenWithNewsList(
     scaffoldState: ScaffoldState,
     modifier: Modifier = Modifier,
 
-) {
+    ) {
     Scaffold(
         modifier = modifier,
         scaffoldState = scaffoldState,
-        topBar = {
-            TopAppBar(
-                modifier = modifier,
-                title = {},
-                navigationIcon = {},
-                actions = {},
-            )
-        },
-        bottomBar = {},
+        topBar = { },
+        bottomBar = { },
         floatingActionButton = {},
     ) { innerPadding ->
         val innerContentModifier = modifier.padding(innerPadding)
-//        TODO should be used when the list is empty
-//        LoadingContent(
-//           )
+
+//        TODO LoadingContent() should be used when the list is empty
 
         NewsList(
             newsFeed = newsFeed,
             onToggleFavourite = onToggleLikeButton,
-            isFavourite = isFavourite ,
-            onArticleTap = onSelectNews)
+            isFavourite = isFavourite,
+            onArticleTap = onSelectNews
+        )
     }
 }
 
@@ -90,42 +77,22 @@ fun NewsList(
                     onFavouriteToggle = onToggleFavourite
                 )
             }
+        }
+        items(newsFeed.normalNews) {
             if (newsFeed.normalNews.isNotEmpty()) {
-                NormalNewsSection(
-                    newsData = newsFeed.normalNews,
-                    navigateToArticle = onArticleTap,
-                    onToggleFavourite = {}
-                )
+                newsFeed.normalNews.forEach { news ->
+
+                    NormalNewsSection(
+                        newsData = news,
+                        navigateToArticle = onArticleTap,
+                        onToggleFavourite = {}
+                    )
+                }
             }
+
         }
     }
 }
 
-//--- TODO i do not think we need this, its more of a duplication since we
-//         we the HomeFeedScreenWithNewsList()
-@RequiresApi(Build.VERSION_CODES.O)
-@Composable
-fun HomeScreenWithArticleDetailsScreen(
-    showTopAppBar: Boolean,
-    onToggleFavourite: (Int) -> Unit,
-    onSelectNews: (String) -> Unit,
-    onRefreshNews: () -> Unit,
-    onErrorDismissed: (Long) -> Unit,
-    openDrawer: () -> Unit,
-    scaffoldState: ScaffoldState,
-    modifier: Modifier = Modifier,
-    onSearchInputChanged: () -> Unit
-) {
-//    HomeFeedScreenWithNewsList(
-//        newsFeed = mockNewsFeed,
-//        onToggleLikeButton = {},
-//        onSelectNews = {},
-//        onRefreshNews = {},
-//        showTopAppBar = showTopAppBar,
-//        onErrorDismissed = onErrorDismissed,
-//        scaffoldState = scaffoldState,
-//        modifier = modifier,
-//    )
 
-}
 

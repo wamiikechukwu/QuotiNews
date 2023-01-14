@@ -61,7 +61,7 @@ fun NewsList(
     isFavourite: Set<String>,
     onArticleTap: (String) -> Unit,
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(0.dp),
+    contentPadding: PaddingValues = PaddingValues(horizontal = 10.dp),
     state: LazyListState = rememberLazyListState(),
 ) {
     LazyColumn(

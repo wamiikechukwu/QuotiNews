@@ -25,7 +25,6 @@ import dev.iamwami.app.quotinews.R
 import dev.iamwami.app.quotinews.model.News
 import dev.iamwami.app.quotinews.ui.theme.QuotiNewsTheme
 import dev.iamwami.app.quotinews.ui.util.SampleNewsApiDataProvider
-import dev.iamwami.app.quotinews.util.dateFormatter
 
 /**
  * A single UI for the popular news card
@@ -41,7 +40,6 @@ fun PopularNews(
     Column(
         modifier = modifier
             .width(350.dp)
-            .padding(start = 12.dp),
     ) {
 //            Coil image loader
         AsyncImage(

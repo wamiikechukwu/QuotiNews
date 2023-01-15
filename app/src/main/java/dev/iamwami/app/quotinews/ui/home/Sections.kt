@@ -2,6 +2,7 @@ package dev.iamwami.app.quotinews.ui.home
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
@@ -20,14 +21,15 @@ fun PopularNewsSection(
     newsDataList: List<News>,
     isFavourite: Set<String>,
     onFavouriteToggle: (String) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-    Column(modifier = Modifier.padding(end = 16.dp)) {
+    Column() {
         Text(
-            modifier = Modifier.padding(16.dp),
+            modifier = modifier.padding(vertical = 16.dp),
             text = "Popular News for you",
             style = MaterialTheme.typography.subtitle1
         )
-        LazyRow {
+        LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             items(newsDataList) { news ->
                 PopularNews(
                     newsData = news,
@@ -36,6 +38,7 @@ fun PopularNewsSection(
                 )
             }
         }
+        PostDivider()
     }
 }
 

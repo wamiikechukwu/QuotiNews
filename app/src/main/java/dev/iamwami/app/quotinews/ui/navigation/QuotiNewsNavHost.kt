@@ -8,7 +8,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import dev.iamwami.app.quotinews.ui.home.HomeRoute
-import dev.iamwami.app.quotinews.ui.home.HomeScreenWithArticleDetailsScreen
 import dev.iamwami.app.quotinews.ui.home.HomeViewModel
 import dev.iamwami.app.quotinews.ui.splashscreens.NavigateToSplashScreen
 import dev.iamwami.app.quotinews.ui.util.HomeScreen

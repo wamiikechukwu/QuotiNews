@@ -17,9 +17,6 @@ class RemoteNewsRepository(
     }
 
     suspend fun getNews(): ResultWrapper<News> {
-//        val queryFilter: MutableMap<String, String> = mutableMapOf()
-//        queryFilter.put("q","telsa")
-
         return safeApiCall(
             coroutineDispatcher,
             apiCallFunction = {
@@ -27,14 +24,4 @@ class RemoteNewsRepository(
             },
         )
     }
-
-//    suspend fun getNews(): TestingNews{
-////        val queryFilter: MutableMap<String, String> = mutableMapOf()
-////        queryFilter.put("q","telsa")
-//
-//        val result = apiService.getNewsByCategory()
-//
-//        return result
-//    }
-
 }

@@ -1,9 +1,9 @@
 package dev.iamwami.app.quotinews.model
 
 data class News(
-    val status: String,
-    val totalResults: Int,
-    val articles: List<Articles>
+    val status: String? = "",
+    val totalResults: Int? = 0,
+    val articles: List<Articles>? = emptyList()
 )
 
 data class Articles(

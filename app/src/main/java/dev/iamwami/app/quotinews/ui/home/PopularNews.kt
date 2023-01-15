@@ -25,7 +25,6 @@ import dev.iamwami.app.quotinews.R
 import dev.iamwami.app.quotinews.model.News
 import dev.iamwami.app.quotinews.ui.theme.QuotiNewsTheme
 import dev.iamwami.app.quotinews.ui.util.SampleNewsApiDataProvider
-import dev.iamwami.app.quotinews.util.dateFormatter
 
 /**
  * A single UI for the popular news card
@@ -41,11 +40,10 @@ fun PopularNews(
     Column(
         modifier = modifier
             .width(350.dp)
-            .padding(start = 12.dp),
     ) {
 //            Coil image loader
         AsyncImage(
-            model = newsData.articles[0].urlToImage,
+            model = newsData.articles?.get(0)?.urlToImage,
             contentDescription = "preview image from the news source",
             modifier = modifier
                 .height(200.dp)
@@ -55,20 +53,24 @@ fun PopularNews(
             contentScale = ContentScale.Crop
         )
 //        News title
-        Text(
-            modifier = Modifier.padding(top = 16.dp, bottom = 8.dp),
-            text = newsData.articles[0].title,
-            style = MaterialTheme.typography.h6,
-            overflow = TextOverflow.Ellipsis,
-            maxLines = 1
-        )
+        newsData.articles?.get(0)?.let {
+            Text(
+                modifier = Modifier.padding(top = 16.dp, bottom = 8.dp),
+                text = it.title,
+                style = MaterialTheme.typography.h6,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1
+            )
+        }
 //        News description
-        Text(
-            text = newsData.articles[0].description,
-            style = MaterialTheme.typography.body2,
-            overflow = TextOverflow.Ellipsis,
-            maxLines = 2,
-        )
+        newsData.articles?.get(0)?.let {
+            Text(
+                text = it.description,
+                style = MaterialTheme.typography.body2,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 2,
+            )
+        }
 //        Icons row
         Row(
             modifier = modifier
@@ -78,17 +80,19 @@ fun PopularNews(
         ) {
 //            For the new publisher name and date published
             Row {
-                Text(
-                    text = newsData.articles[0].source.name,
-                    style = MaterialTheme.typography.body2,
-                    overflow = TextOverflow.Ellipsis, maxLines = 1
-                )
+                newsData.articles?.get(0)?.source?.let {
+                    Text(
+                        text = it.name,
+                        style = MaterialTheme.typography.body2,
+                        overflow = TextOverflow.Ellipsis, maxLines = 1
+                    )
+                }
                 Spacer(modifier = modifier.width(8.dp))
                 Text(
                     /**
                      *TODO uncomment the date formatter
                      **/
-                    text = dateFormatter(newsData.articles[0].publishedAt),
+                    text = "newsData.articles?.get(0)?.let { dateFormatter(it.publishedAt) }",
                     style = MaterialTheme.typography.body2,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1

@@ -1,21 +1,16 @@
 package dev.iamwami.app.quotinews.ui.home
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.Button
 import androidx.compose.material.ScaffoldState
-import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
-import dev.iamwami.app.quotinews.model.NewsFeed
+import dev.iamwami.app.quotinews.db.entity.NewsTable
+import dev.iamwami.app.quotinews.db.entity.Source
 import dev.iamwami.app.quotinews.model.mockNewsFeed
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -28,10 +23,26 @@ fun HomeRoute(
     navController: NavHostController
 ) {
 
-    val getNewsDetails by homeViewModel.newsResult.collectAsStateWithLifecycle()
-    
+//    TODO CREATE A DIFFERENT COMPOSABLE FOR THIS
+    val getNewsDetailsFromRemote by homeViewModel.newsResult.collectAsStateWithLifecycle()
+    getNewsDetailsFromRemote?.data?.articles?.forEach { newsArticle ->
+        homeViewModel.insertNews(
+            NewsTable(
+                source = Source(id = newsArticle.source.id, name = newsArticle.source.name),
+                urlToImage = newsArticle.urlToImage,
+                url = newsArticle.url,
+                author = newsArticle.author,
+                description = newsArticle.description,
+                publishedAt = newsArticle.publishedAt,
+                content = newsArticle.content,
+                title = newsArticle.title
+            )
+        )
+    }
+
+
     HomeFeedScreenWithNewsList(
-        newsFeed = mockNewsFeed ,
+        newsFeed = mockNewsFeed,
         onToggleLikeButton = {},
         onSelectNews = {},
         showTopAppBar = false,

@@ -1,13 +1,11 @@
 package dev.iamwami.app.quotinews.ui.home
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -78,20 +76,27 @@ fun NewsList(
                 )
             }
         }
-        items(newsFeed.normalNews) {
+        itemsIndexed(newsFeed.normalNews) { index, news ->
             if (newsFeed.normalNews.isNotEmpty()) {
-                newsFeed.normalNews.forEach { news ->
-
-                    NormalNewsSection(
-                        newsData = news,
-                        navigateToArticle = onArticleTap,
-                        onToggleFavourite = {}
-                    )
-                }
+                NormalNewsSection(
+                    newsData = news,
+                    navigateToArticle = onArticleTap,
+                    onToggleFavourite = {}
+                )
+                Log.d("testing", "what index is this $index")
             }
+        }
+
+
+    }
+    val showButton by remember {
+        derivedStateOf {
+            Log.d("testing", "${state.firstVisibleItemIndex}")
 
         }
     }
+
+    showButton
 }
 
 

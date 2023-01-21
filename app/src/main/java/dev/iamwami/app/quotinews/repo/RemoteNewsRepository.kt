@@ -1,4 +1,4 @@
-package dev.iamwami.app.quotinews.network.repo
+package dev.iamwami.app.quotinews.repo
 
 import dev.iamwami.app.quotinews.model.News
 import dev.iamwami.app.quotinews.network.QuotiNewsApiService

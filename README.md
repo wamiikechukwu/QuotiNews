@@ -10,6 +10,7 @@ This is a wireframe of the app and a low fidelity of how it will look like when 
 
 |                                                            |                                                             |                       |
 |------------------------------------------------------------|-------------------------------------------------------------|-----------------------|
-| <img src="screenshots/quotiapp_wireframe.png" width="400"> | <img src="screenshots/quotiapp_wireframe1.png" width="400"> | <img src="screenshots/quotiapp_wireframe.png" width="400"> |                            |
+
+| <img src="screenshots/quotiapp_wireframe.png" width="400"> | <img src="screenshots/quotiapp_wireframe1.png" width="400"> | <img src="screenshots/quotiapp_wireframe.png" width="400"> |                            
 
 ## Features

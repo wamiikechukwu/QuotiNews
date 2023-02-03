@@ -23,6 +23,7 @@ fun HomeFeedScreenWithNewsList(
     onToggleLikeButton: (String) -> Unit,
     onSelectNews: (String) -> Unit,
     showTopAppBar: Boolean,
+    homeLazyListState: LazyListState,
     onRefreshNews: () -> Unit,
     onErrorDismissed: (Long) -> Unit,
     isFavourite: Set<String>,
@@ -33,7 +34,14 @@ fun HomeFeedScreenWithNewsList(
     Scaffold(
         modifier = modifier,
         scaffoldState = scaffoldState,
-        topBar = { },
+        topBar = {
+            if (showTopAppBar) {
+                TopBar(elevation = if (homeLazyListState.isScrollInProgress) 20.dp else 0.dp) {
+                    Log.d("okkk" ,"homeLazyListState ${homeLazyListState.isScrollInProgress}")
+                    Log.d("okkk" ,"lhkfdsklfhask;la")
+                }
+            }
+        },
         bottomBar = { },
         floatingActionButton = {},
     ) { innerPadding ->

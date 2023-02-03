@@ -5,12 +5,10 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import dev.iamwami.app.quotinews.db.AppDatabase
-import dev.iamwami.app.quotinews.db.dao.NewsDao
 import dev.iamwami.app.quotinews.db.repo.LocalNewsRepository
 import dev.iamwami.app.quotinews.ui.home.HomeRoute
 import dev.iamwami.app.quotinews.ui.home.HomeViewModel
@@ -42,7 +40,8 @@ fun QuotiNewsNavHost(
             HomeRoute(
                 homeViewModel = viewMode,
                 openDrawer = { },
-                navController = navController
+                navController = navController,
+                context = context
             )
         }
     }

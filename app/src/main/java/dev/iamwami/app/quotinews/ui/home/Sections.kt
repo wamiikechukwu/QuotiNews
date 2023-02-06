@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.iamwami.app.quotinews.model.News
 import dev.iamwami.app.quotinews.ui.components.PostDivider
+import dev.iamwami.app.quotinews.ui.home.components.RelatedNews
 import dev.iamwami.app.quotinews.util.Fonts
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -99,4 +100,15 @@ fun TopBar(
         elevation = elevation,
         backgroundColor = MaterialTheme.colors.surface
     )
+}
+
+/*
+* This is the related news
+* */
+@Composable
+fun RelatedNewsSection(
+    newsData: News,
+    modifier: Modifier,
+) {
+    RelatedNews(newsData = newsData)
 }

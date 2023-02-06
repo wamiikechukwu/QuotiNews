@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.iamwami.app.quotinews.model.NewsFeed
+import dev.iamwami.app.quotinews.ui.home.components.RelatedNews
 
 
 /**
@@ -37,8 +38,7 @@ fun HomeFeedScreenWithNewsList(
         topBar = {
             if (showTopAppBar) {
                 TopBar(elevation = if (homeLazyListState.isScrollInProgress) 20.dp else 0.dp) {
-                    Log.d("okkk" ,"homeLazyListState ${homeLazyListState.isScrollInProgress}")
-                    Log.d("okkk" ,"lhkfdsklfhask;la")
+
                 }
             }
         },
@@ -85,26 +85,31 @@ fun NewsList(
             }
         }
         itemsIndexed(newsFeed.normalNews) { index, news ->
+
+            val showButton by remember {
+                derivedStateOf {
+                    (index + 1) % 6
+
+                }
+            }
+
             if (newsFeed.normalNews.isNotEmpty()) {
                 NormalNewsSection(
                     newsData = news,
                     navigateToArticle = onArticleTap,
                     onToggleFavourite = {}
                 )
-                Log.d("testing", "what index is this $index")
             }
+
+            if (showButton == 0){
+                RelatedNews(newsData = news)
+            }
+            Log.d("testing", "index is $showButton")
         }
 
 
     }
-    val showButton by remember {
-        derivedStateOf {
-            Log.d("testing", "${state.firstVisibleItemIndex}")
 
-        }
-    }
-
-    showButton
 }
 
 

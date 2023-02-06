@@ -12,10 +12,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import dev.iamwami.app.quotinews.model.News
-import dev.iamwami.app.quotinews.ui.components.NewsImageSmall
-import dev.iamwami.app.quotinews.ui.components.NewsListLikeBtn
+import dev.iamwami.app.quotinews.ui.components.LikeBtn
+import dev.iamwami.app.quotinews.ui.components.NewsImage
 import dev.iamwami.app.quotinews.ui.util.SampleNewsApiDataProvider
-import dev.iamwami.app.quotinews.util.dateFormatter
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -29,7 +28,7 @@ fun NormalNews(
         horizontalArrangement = Arrangement.SpaceBetween,
 
         ) {
-        NewsImageSmall(
+        NewsImage(
             newsData = newsData,
             modifier = modifier
                 .height(70.dp)
@@ -60,7 +59,7 @@ fun NormalNews(
 //                )
             }
         }
-        NewsListLikeBtn()
+        LikeBtn()
 
     }
 }

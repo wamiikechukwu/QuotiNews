@@ -20,16 +20,15 @@ import dev.iamwami.app.quotinews.model.News
 
 //TODO find the best way to work around passing modifier as an arguement.
 @Composable
-fun NewsImageSmall(
-    modifier: Modifier = Modifier,
+fun NewsImage(
+    modifier: Modifier = Modifier.clip(shape = MaterialTheme.shapes.medium),
     newsData: News,
     contentDescription: String = "preview image from the news source"
 ) {
     AsyncImage(
         model = newsData.articles?.get(0)?.urlToImage,
         contentDescription = contentDescription,
-        modifier = modifier
-            .clip(shape = MaterialTheme.shapes.medium),
+        modifier = modifier,
         placeholder = painterResource(id = R.drawable.news_article_image_placeholder_two),
         contentScale = ContentScale.Crop
     )

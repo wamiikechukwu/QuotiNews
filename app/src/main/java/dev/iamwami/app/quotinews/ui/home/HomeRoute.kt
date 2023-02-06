@@ -1,9 +1,7 @@
 package dev.iamwami.app.quotinews.ui.home
 
-import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -22,40 +20,37 @@ fun HomeRoute(
     homeViewModel: HomeViewModel,
     openDrawer: () -> Unit,
     scaffoldState: ScaffoldState = rememberScaffoldState(),
-    navController: NavHostController,
-    context: Context
+    navController: NavHostController
 ) {
 
-
-        //    TODO CREATE A DIFFERENT COMPOSABLE FOR THIS
-        val getNewsDetailsFromRemote by homeViewModel.newsResult.collectAsStateWithLifecycle()
-        getNewsDetailsFromRemote?.data?.articles?.forEach { newsArticle ->
-            homeViewModel.insertNews(
-                NewsTable(
-                    source = Source(id = newsArticle.source.id, name = newsArticle.source.name),
-                    urlToImage = newsArticle.urlToImage,
-                    url = newsArticle.url,
-                    author = newsArticle.author,
-                    description = newsArticle.description,
-                    publishedAt = newsArticle.publishedAt,
-                    content = newsArticle.content,
-                    title = newsArticle.title
-                )
+//    TODO CREATE A DIFFERENT COMPOSABLE FOR THIS
+    val getNewsDetailsFromRemote by homeViewModel.newsResult.collectAsStateWithLifecycle()
+    getNewsDetailsFromRemote?.data?.articles?.forEach { newsArticle ->
+        homeViewModel.insertNews(
+            NewsTable(
+                source = Source(id = newsArticle.source.id, name = newsArticle.source.name),
+                urlToImage = newsArticle.urlToImage,
+                url = newsArticle.url,
+                author = newsArticle.author,
+                description = newsArticle.description,
+                publishedAt = newsArticle.publishedAt,
+                content = newsArticle.content,
+                title = newsArticle.title
             )
-        }
-
-
-        HomeFeedScreenWithNewsList(
-            newsFeed = mockNewsFeed,
-            onToggleLikeButton = {},
-            onSelectNews = {},
-            showTopAppBar = true,
-            homeLazyListState = rememberLazyListState(),
-            onRefreshNews = { /*TODO*/ },
-            onErrorDismissed = {},
-            isFavourite = emptySet(),
-            scaffoldState = rememberScaffoldState()
-
         )
+    }
+
+
+    HomeFeedScreenWithNewsList(
+        newsFeed = mockNewsFeed,
+        onToggleLikeButton = {},
+        onSelectNews = {},
+        showTopAppBar = false,
+        onRefreshNews = { /*TODO*/ },
+        onErrorDismissed = {},
+        isFavourite = emptySet(),
+        scaffoldState = rememberScaffoldState()
+
+    )
 
 }

@@ -10,14 +10,23 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material3.AssistChipDefaults
+import androidx.compose.material3.ChipBorder
+import androidx.compose.material3.ChipColors
+import androidx.compose.material3.ChipElevation
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.iamwami.app.quotinews.model.News
 import dev.iamwami.app.quotinews.ui.components.PostDivider
+import dev.iamwami.app.quotinews.ui.home.components.NewsChip
 import dev.iamwami.app.quotinews.ui.home.components.RelatedNews
+import dev.iamwami.app.quotinews.util.AssistChipDetails
 import dev.iamwami.app.quotinews.util.Fonts
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -112,3 +121,48 @@ fun RelatedNewsSection(
 ) {
     RelatedNews(newsData = newsData)
 }
+
+/*
+* This is the Chips, shows different news category
+* */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun NewsChipCategory(
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    shape: Shape = AssistChipDefaults.shape,
+    colors: ChipColors = AssistChipDefaults.assistChipColors(),
+    elevation: ChipElevation? = AssistChipDefaults.assistChipElevation(),
+    border: ChipBorder? = AssistChipDefaults.assistChipBorder(),
+) {
+
+    val context = LocalContext.current
+
+    LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        items(AssistChipDetails.chipCategory()) { data ->
+            NewsChip(
+                onClick = {
+                    Toast.makeText(context, "Functionality not yet implemented", Toast.LENGTH_SHORT).show()
+                },
+                label = { Text(text = data.name) },
+                modifier = modifier,
+                isChipEnabled = enabled,
+                leadingIcon = {
+                    Icon(
+                        painter = painterResource(id = data.icon),
+                        contentDescription = data.name,
+                        Modifier.size(AssistChipDefaults.IconSize)
+                    )
+                },
+                trailingIcon = {},
+                shape = shape,
+                colors = colors,
+                elevation = elevation,
+                border = border
+
+            )
+        }
+    }
+}
+
+

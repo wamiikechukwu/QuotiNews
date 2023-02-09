@@ -110,7 +110,7 @@ fun NewsList(
             }
 
             if (showButton == 0) {
-                RelatedNews(newsData = news)
+                RelatedNewsSection(newsData = news)
             }
             Log.d("testing", "index is $showButton")
         }

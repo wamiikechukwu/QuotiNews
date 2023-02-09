@@ -117,7 +117,7 @@ fun TopBar(
 @Composable
 fun RelatedNewsSection(
     newsData: News,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
 ) {
     RelatedNews(newsData = newsData)
 }

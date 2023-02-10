@@ -82,6 +82,9 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
+//    MATERIAL DESIGN 3
+    implementation "androidx.compose.material3:material3:1.0.1"
+    implementation "androidx.compose.material3:material3-window-size-class:1.0.1"
 
 
 

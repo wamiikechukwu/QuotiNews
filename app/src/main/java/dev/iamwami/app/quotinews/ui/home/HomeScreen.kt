@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.*
 import androidx.compose.material.*
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -49,6 +50,7 @@ fun HomeFeedScreenWithNewsList(
 
 //        TODO LoadingContent() should be used when the list is empty
 
+
         NewsList(
             newsFeed = newsFeed,
             onToggleFavourite = onToggleLikeButton,
@@ -59,6 +61,7 @@ fun HomeFeedScreenWithNewsList(
 }
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NewsList(
@@ -70,11 +73,16 @@ fun NewsList(
     contentPadding: PaddingValues = PaddingValues(horizontal = 10.dp),
     state: LazyListState = rememberLazyListState(),
 ) {
+
     LazyColumn(
         modifier = modifier,
         contentPadding = contentPadding,
         state = state,
     ) {
+
+        item {
+            NewsChipCategory()
+        }
         item {
             if (newsFeed.popularNews.isNotEmpty()) {
                 PopularNewsSection(
@@ -101,16 +109,18 @@ fun NewsList(
                 )
             }
 
-            if (showButton == 0){
-                RelatedNews(newsData = news)
+            if (showButton == 0) {
+                RelatedNewsSection(newsData = news)
             }
             Log.d("testing", "index is $showButton")
         }
 
 
     }
-
 }
+
+
+
 
 
 

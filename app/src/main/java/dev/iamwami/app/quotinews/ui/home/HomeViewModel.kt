@@ -2,50 +2,45 @@ package dev.iamwami.app.quotinews.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.iamwami.app.quotinews.db.entity.NewsTable
-import dev.iamwami.app.quotinews.db.repo.LocalNewsRepository
-import dev.iamwami.app.quotinews.model.News
-import dev.iamwami.app.quotinews.repo.RemoteNewsRepository
-import dev.iamwami.app.quotinews.util.ResultWrapper
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.iamwami.app.quotinews.data.NewsRepository
+import dev.iamwami.app.quotinews.model.NewsFeed
+import dev.iamwami.app.quotinews.model.mockNewsFeed
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+import kotlin.time.Duration.Companion.seconds
 
-class HomeViewModel(private val localDbRepository: LocalNewsRepository) : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val newsRepository: NewsRepository
+) : ViewModel() {
 
-    private var _newsResult: MutableStateFlow<ResultWrapper<News>?> = MutableStateFlow(null)
-    val newsResult: StateFlow<ResultWrapper<News>?> = _newsResult
-
-
-    private fun getAllAvailableNews() {
-
-        viewModelScope.launch {
-
-            val response = RemoteNewsRepository().getNews()
-
-            when (response) {
-                is ResultWrapper.Loading -> {
-                    _newsResult.value = response
-                }
-                is ResultWrapper.Error -> {
-                    _newsResult.value = response
-                }
-                is ResultWrapper.Success -> {
-                    _newsResult.value = response
-                }
-            }
+    val news = newsRepository.getLatestNews()
+        .map { result ->
+            /**
+             * TODO A DECISION HAS TO BE MADE ABOUT HOW TO MODIFY THE NEW FROM
+             *  THE API INTO DIGESTIBLE Contacts.Intents.UI STATE.
+             */
+            if (result.isNotEmpty()) {
+                NewsFeed(
+                    popularNews = emptyList(),
+                    highlightedNews = emptyList(),
+                    recommendedNews = emptyList(),
+                    normalNews = emptyList()
+                )
+            } else mockNewsFeed
         }
-    }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5.seconds.inWholeMilliseconds),
+            initialValue = mockNewsFeed
+        )
 
-    fun insertNews(news: NewsTable) {
-        viewModelScope.launch {
-            localDbRepository.insertNews(news)
-        }
-    }
-
-    init {
-//        Uncomment to start making API calls
-        getAllAvailableNews()
+    fun refreshNews() = viewModelScope.launch {
+        newsRepository.requestNews()
     }
 
 }

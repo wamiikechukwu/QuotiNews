@@ -5,7 +5,7 @@ buildscript {
         ext.accompanist_version = '0.25.0'
         room_version = "2.5.0"
         hilt_version = "2.44.2"
-
+        hilt_extended_version = "1.0.0"
     }
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {

@@ -89,8 +89,9 @@ dependencies {
     implementation "androidx.compose.material3:material3-window-size-class:1.0.1"
 
     //hilt dependency injection
+    implementation("androidx.hilt:hilt-navigation-compose:$hilt_extended_version")
     implementation("com.google.dagger:hilt-android:$hilt_version")
-    kapt("com.google.dagger:hilt-compiler:$hilt_version")
+    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
 
 
     testImplementation 'junit:junit:4.13.2'

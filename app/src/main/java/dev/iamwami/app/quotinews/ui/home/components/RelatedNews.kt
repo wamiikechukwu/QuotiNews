@@ -54,7 +54,9 @@ fun RelatedNews(
                         text = "12-12-2022",
                         style = MaterialTheme.typography.body2,
                     )
-                    LikeBtn()
+                    LikeBtn(isLiked = {
+
+                    })
                 }
 
                 Text(

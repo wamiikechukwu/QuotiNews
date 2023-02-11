@@ -1,6 +1,7 @@
 package dev.iamwami.app.quotinews.ui.home
 
 import android.os.Build
+import android.util.SparseBooleanArray
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -59,7 +60,10 @@ fun NormalNews(
 //                )
             }
         }
-        LikeBtn()
+
+        LikeBtn(isLiked = {
+
+        })
 
     }
 }

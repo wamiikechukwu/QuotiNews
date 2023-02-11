@@ -1,13 +1,16 @@
 package dev.iamwami.app.quotinews.ui.components
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
+import androidx.compose.material.IconToggleButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -36,14 +39,24 @@ fun NewsImage(
 }
 
 @Composable
-fun LikeBtn(modifier: Modifier = Modifier) {
+fun LikeBtn(
+    modifier: Modifier = Modifier,
+    isLiked: () -> Boolean,
+    onClicked: (() -> Unit)? = null
+) {
     val context = LocalContext.current
-    IconButton(
-        onClick = {
-//            Toast.makeText(context, "Functionality not available", Toast.LENGTH_SHORT).show()
-        }
+
+    val message = remember {
+        if (isLiked()) "Added to bookmark" else "removed from bookmark"
+    }
+    IconToggleButton(
+        checked = isLiked(),
+        onCheckedChange = { Toast.makeText(context, message, Toast.LENGTH_SHORT).show() },
     ) {
-        Icon(Icons.Outlined.FavoriteBorder, contentDescription = "Heart icon for favourite news")
+        Icon(
+            imageVector = if (isLiked()) Icons.Outlined.FavoriteBorder else Icons.Outlined.Favorite,
+            contentDescription = "Heart icon for favourite news"
+        )
     }
 }
 

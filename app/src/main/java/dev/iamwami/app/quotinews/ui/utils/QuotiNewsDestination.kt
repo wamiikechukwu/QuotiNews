@@ -1,4 +1,4 @@
-package dev.iamwami.app.quotinews.ui.util
+package dev.iamwami.app.quotinews.ui.utils
 
 interface QuotiNewsDestination {
     val route: String

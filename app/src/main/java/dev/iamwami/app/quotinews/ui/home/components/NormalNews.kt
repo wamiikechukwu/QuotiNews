@@ -1,7 +1,5 @@
 package dev.iamwami.app.quotinews.ui.home
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -12,11 +10,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import dev.iamwami.app.quotinews.model.News
-import dev.iamwami.app.quotinews.ui.components.LikeBtn
+import dev.iamwami.app.quotinews.ui.components.LikeButton
 import dev.iamwami.app.quotinews.ui.components.NewsImage
-import dev.iamwami.app.quotinews.ui.util.SampleNewsApiDataProvider
+import dev.iamwami.app.quotinews.ui.utils.SampleNewsApiDataProvider
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NormalNews(
     modifier: Modifier = Modifier,
@@ -59,12 +56,11 @@ fun NormalNews(
 //                )
             }
         }
-        LikeBtn()
+        LikeButton()
 
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview()
 @Composable
 fun NewsListPreview(@PreviewParameter(SampleNewsApiDataProvider::class) data: News) {

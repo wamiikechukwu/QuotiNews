@@ -18,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import dev.iamwami.app.quotinews.R
-import dev.iamwami.app.quotinews.ui.util.HomeScreen
-import dev.iamwami.app.quotinews.util.Fonts
+import dev.iamwami.app.quotinews.ui.utils.HomeScreen
+import dev.iamwami.app.quotinews.ui.theme.Fonts
 import kotlinx.coroutines.delay
 
 @Composable

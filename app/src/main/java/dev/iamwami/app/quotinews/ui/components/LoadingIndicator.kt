@@ -1,4 +1,4 @@
-package dev.iamwami.app.quotinews.ui.util
+package dev.iamwami.app.quotinews.ui.utils
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth

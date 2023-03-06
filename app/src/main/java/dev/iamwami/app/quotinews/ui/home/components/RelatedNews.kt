@@ -19,10 +19,10 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.iamwami.app.quotinews.model.News
-import dev.iamwami.app.quotinews.ui.components.LikeBtn
+import dev.iamwami.app.quotinews.ui.components.LikeButton
 import dev.iamwami.app.quotinews.ui.components.NewsImage
 import dev.iamwami.app.quotinews.ui.components.PostDivider
-import dev.iamwami.app.quotinews.ui.util.SampleNewsApiDataProvider
+import dev.iamwami.app.quotinews.ui.utils.SampleNewsApiDataProvider
 
 @Composable
 fun RelatedNews(
@@ -54,7 +54,7 @@ fun RelatedNews(
                         text = "12-12-2022",
                         style = MaterialTheme.typography.body2,
                     )
-                    LikeBtn()
+                    LikeButton()
                 }
 
                 Text(

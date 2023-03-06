@@ -24,7 +24,7 @@ android {
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
 
-        buildConfigField "String", "API_KEY", "\"${properties.getProperty("API_KEY")}\""
+        buildConfigField "String", "API_KEY", "\"${properties.getProperty("NEWS_API_KEY")}\""
     }
 
     buildTypes {
@@ -34,6 +34,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_9
         targetCompatibility JavaVersion.VERSION_1_9
     }
@@ -63,9 +64,10 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling-preview:1.2.1"
     implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha03"
     implementation "androidx.navigation:navigation-compose:2.5.2"
-
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.2'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
     implementation 'androidx.activity:activity-compose:1.6.0'
+
 
 //    coil
     implementation("io.coil-kt:coil-compose:2.2.1")
@@ -92,7 +94,6 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:$hilt_extended_version")
     implementation("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
-
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

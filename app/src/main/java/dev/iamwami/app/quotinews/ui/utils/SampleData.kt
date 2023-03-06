@@ -1,4 +1,4 @@
-package dev.iamwami.app.quotinews.ui.util
+package dev.iamwami.app.quotinews.ui.utils
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import dev.iamwami.app.quotinews.model.Articles

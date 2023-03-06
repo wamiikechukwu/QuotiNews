@@ -1,4 +1,4 @@
-package dev.iamwami.app.quotinews.util
+package dev.iamwami.app.quotinews.ui.utils
 
 import dev.iamwami.app.quotinews.R
 

@@ -5,6 +5,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -30,9 +31,9 @@ import dev.iamwami.app.quotinews.ui.util.SampleNewsApiDataProvider
 fun RelatedNews(
     newsData: News,
     modifier: Modifier = Modifier,
+    onToggleLikeBtn: MutableState<Boolean>
 ) {
 
-    val btnState = remember { mutableStateOf(true) }
 
     Column {
         newsData.articles?.get(0)?.let {
@@ -60,9 +61,9 @@ fun RelatedNews(
                     )
 
                     LikeBtn(
-                        onCheckedBtnState = btnState.value,
+                        onCheckedBtnState = onToggleLikeBtn.value,
                         onToggleBtn = {
-                            btnState.value = btnState.value != true
+                            onToggleLikeBtn.value = onToggleLikeBtn.value != true
                         }
                     )
                 }
@@ -107,5 +108,7 @@ fun RelatedNews(
 @Preview()
 @Composable
 fun RelatedNewsPreview(@PreviewParameter(SampleNewsApiDataProvider::class) data: News) {
-    RelatedNews(newsData = data)
+    RelatedNews(newsData = data,
+        onToggleLikeBtn = remember { mutableStateOf(true) }
+    )
 }

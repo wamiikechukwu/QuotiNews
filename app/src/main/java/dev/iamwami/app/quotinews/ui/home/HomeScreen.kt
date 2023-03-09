@@ -20,7 +20,7 @@ import dev.iamwami.app.quotinews.model.NewsFeed
 @Composable
 fun HomeFeedScreenWithNewsList(
     newsFeed: NewsFeed,
-    onToggleLikeButton: (String) -> Unit,
+    onToggleLikeButton: MutableState<Boolean>,
     onSelectNews: (String) -> Unit,
     showTopAppBar: Boolean,
     homeLazyListState: LazyListState,
@@ -51,7 +51,6 @@ fun HomeFeedScreenWithNewsList(
 
         NewsList(
             newsFeed = newsFeed,
-            onToggleFavourite = onToggleLikeButton,
             isFavourite = isFavourite,
             onArticleTap = onSelectNews
         )
@@ -64,7 +63,6 @@ fun HomeFeedScreenWithNewsList(
 @Composable
 fun NewsList(
     newsFeed: NewsFeed,
-    onToggleFavourite: (String) -> Unit,
     isFavourite: Set<String>,
     onArticleTap: (String) -> Unit,
     modifier: Modifier = Modifier,
@@ -86,7 +84,6 @@ fun NewsList(
                 PopularNewsSection(
                     newsDataList = newsFeed.popularNews,
                     isFavourite = isFavourite,
-                    onFavouriteToggle = onToggleFavourite
                 )
             }
         }
@@ -103,12 +100,14 @@ fun NewsList(
                 NormalNewsSection(
                     newsData = news,
                     navigateToArticle = onArticleTap,
-                    onToggleFavourite = {}
+                    onToggleFavourite = remember { mutableStateOf(true) }
                 )
             }
 
             if (showButton == 0) {
-                RelatedNewsSection(newsData = news)
+                RelatedNewsSection(newsData = news,
+                onToggleLikeBtn = remember { mutableStateOf(true) }
+                )
             }
         }
 

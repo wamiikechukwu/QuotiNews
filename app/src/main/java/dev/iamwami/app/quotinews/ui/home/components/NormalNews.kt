@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -18,17 +19,16 @@ import dev.iamwami.app.quotinews.ui.components.LikeBtn
 import dev.iamwami.app.quotinews.ui.components.NewsImage
 import dev.iamwami.app.quotinews.ui.util.SampleNewsApiDataProvider
 
-@RequiresApi(Build.VERSION_CODES.O)
-@Composable
+@RequiresApi(Build.VERSION_CODES.O)@Composable
 fun NormalNews(
     modifier: Modifier = Modifier,
     newsData: News,
     navigateToArticle: (String) -> Unit,
-    onToggleFavourite: () -> Unit,
+    onToggleFavourite: MutableState<Boolean>,
 ) {
 
-    val btnState = remember { mutableStateOf(true) }
 
+    val i = onToggleFavourite
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
 
@@ -66,9 +66,9 @@ fun NormalNews(
         }
 
         LikeBtn(
-            onCheckedBtnState = btnState.value,
+            onCheckedBtnState = onToggleFavourite.value,
             onToggleBtn = {
-                btnState.value = btnState.value != true
+                onToggleFavourite.value = onToggleFavourite.value != true
             }
         )
 
@@ -81,5 +81,6 @@ fun NormalNews(
 fun NewsListPreview(@PreviewParameter(SampleNewsApiDataProvider::class) data: News) {
     NormalNews(newsData = data,
         navigateToArticle = {},
-        onToggleFavourite = {})
+        onToggleFavourite = remember { mutableStateOf(true) }
+    )
 }

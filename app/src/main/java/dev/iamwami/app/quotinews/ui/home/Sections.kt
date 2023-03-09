@@ -16,6 +16,7 @@ import androidx.compose.material3.ChipColors
 import androidx.compose.material3.ChipElevation
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
@@ -35,7 +36,6 @@ import dev.iamwami.app.quotinews.util.Fonts
 fun PopularNewsSection(
     newsDataList: List<News>,
     isFavourite: Set<String>,
-    onFavouriteToggle: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column() {
@@ -63,7 +63,7 @@ fun NormalNewsSection(
     modifier: Modifier = Modifier,
     newsData: News,
     navigateToArticle: (String) -> Unit,
-    onToggleFavourite: () -> Unit
+    onToggleFavourite: MutableState<Boolean>
 ) {
     NormalNews(
         newsData = newsData,
@@ -119,8 +119,13 @@ fun TopBar(
 fun RelatedNewsSection(
     newsData: News,
     modifier: Modifier = Modifier,
+    onToggleLikeBtn: MutableState<Boolean>
 ) {
-    RelatedNews(newsData = newsData)
+    RelatedNews(
+        newsData = newsData,
+        modifier = modifier,
+        onToggleLikeBtn = onToggleLikeBtn
+    )
 }
 
 /*

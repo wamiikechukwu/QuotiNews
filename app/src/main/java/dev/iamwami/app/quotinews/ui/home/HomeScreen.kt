@@ -1,7 +1,6 @@
 package dev.iamwami.app.quotinews.ui.home
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -12,7 +11,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.iamwami.app.quotinews.model.NewsFeed
-import dev.iamwami.app.quotinews.ui.home.components.RelatedNews
 
 
 /**
@@ -112,7 +110,6 @@ fun NewsList(
             if (showButton == 0) {
                 RelatedNewsSection(newsData = news)
             }
-            Log.d("testing", "index is $showButton")
         }
 
 

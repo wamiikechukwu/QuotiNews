@@ -5,6 +5,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,6 +32,8 @@ fun RelatedNews(
     modifier: Modifier = Modifier,
 ) {
 
+    val btnState = remember { mutableStateOf(true) }
+
     Column {
         newsData.articles?.get(0)?.let {
             Text(text = "Related News")
@@ -54,9 +58,13 @@ fun RelatedNews(
                         text = "12-12-2022",
                         style = MaterialTheme.typography.body2,
                     )
-                    LikeBtn(isLiked = {
 
-                    })
+                    LikeBtn(
+                        onCheckedBtnState = btnState.value,
+                        onToggleBtn = {
+                            btnState.value = btnState.value != true
+                        }
+                    )
                 }
 
                 Text(

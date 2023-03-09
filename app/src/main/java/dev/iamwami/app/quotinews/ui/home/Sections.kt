@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import dev.iamwami.app.quotinews.model.News
 import dev.iamwami.app.quotinews.ui.components.PostDivider
 import dev.iamwami.app.quotinews.ui.home.components.NewsChip
+import dev.iamwami.app.quotinews.ui.home.components.NormalNews
 import dev.iamwami.app.quotinews.ui.home.components.RelatedNews
 import dev.iamwami.app.quotinews.util.AssistChipDetails
 import dev.iamwami.app.quotinews.util.Fonts

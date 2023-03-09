@@ -1,12 +1,13 @@
-package dev.iamwami.app.quotinews.ui.home
+package dev.iamwami.app.quotinews.ui.home.components
 
 import android.os.Build
-import android.util.SparseBooleanArray
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,6 +26,9 @@ fun NormalNews(
     navigateToArticle: (String) -> Unit,
     onToggleFavourite: () -> Unit,
 ) {
+
+    val btnState = remember { mutableStateOf(true) }
+
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
 
@@ -61,9 +65,12 @@ fun NormalNews(
             }
         }
 
-        LikeBtn(isLiked = {
-
-        })
+        LikeBtn(
+            onCheckedBtnState = btnState.value,
+            onToggleBtn = {
+                btnState.value = btnState.value != true
+            }
+        )
 
     }
 }

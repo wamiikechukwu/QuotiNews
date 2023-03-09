@@ -10,7 +10,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -41,24 +40,27 @@ fun NewsImage(
 @Composable
 fun LikeBtn(
     modifier: Modifier = Modifier,
-    isLiked: () -> Boolean,
-    onClicked: (() -> Unit)? = null
+    onCheckedBtnState: Boolean,
+    onToggleBtn: (() -> Unit)
 ) {
     val context = LocalContext.current
+    val message = if (onCheckedBtnState) "Added to bookmark" else "removed from bookmark"
 
-    val message = remember {
-        if (isLiked()) "Added to bookmark" else "removed from bookmark"
-    }
     IconToggleButton(
-        checked = isLiked(),
-        onCheckedChange = { Toast.makeText(context, message, Toast.LENGTH_SHORT).show() },
+        checked = onCheckedBtnState,
+        onCheckedChange = {
+            onToggleBtn()
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        }
     ) {
+
         Icon(
-            imageVector = if (isLiked()) Icons.Outlined.FavoriteBorder else Icons.Outlined.Favorite,
+            imageVector = if (onCheckedBtnState) Icons.Outlined.FavoriteBorder else Icons.Outlined.Favorite,
             contentDescription = "Heart icon for favourite news"
         )
     }
 }
+
 
 /* full width divider with padding*/
 @Composable

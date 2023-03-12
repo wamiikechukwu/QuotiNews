@@ -1,0 +1,32 @@
+{
+  "name": "demo",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --ext .js,.ts .",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "start": "node ./bin/www",
+    "dev": "concurrently nodemon ./bin/www"
+  },
+  "dependencies": {
+    "axios": "^1.3.3",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.0.3",
+    "express": "~4.16.1",
+    "firebase-admin": "^11.5.0",
+    "firebase-functions": "^4.2.1",
+    "helmet": "^6.0.1",
+    "http-proxy-middleware": "^2.0.6",
+    "morgan": "~1.9.1",
+    "winston": "^3.8.2",
+    "winston-daily-rotate-file": "^4.7.1"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20"
+  },"engines": {
+    "node": "16"
+  }
+}

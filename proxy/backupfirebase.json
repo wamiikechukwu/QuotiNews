@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site": "qtserver",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  },
+  "emulators": {
+    "functions": {
+      "host": "localhost",
+      "port": "3001"
+    }
+  }
+}

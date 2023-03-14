@@ -12,7 +12,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.iamwami.app.quotinews.model.NewsFeed
-import dev.iamwami.app.quotinews.ui.home.components.RelatedNews
 
 
 /**
@@ -22,7 +21,6 @@ import dev.iamwami.app.quotinews.ui.home.components.RelatedNews
 @Composable
 fun HomeFeedScreenWithNewsList(
     newsFeed: NewsFeed,
-    onToggleLikeButton: (String) -> Unit,
     onSelectNews: (String) -> Unit,
     showTopAppBar: Boolean,
     homeLazyListState: LazyListState,
@@ -53,7 +51,6 @@ fun HomeFeedScreenWithNewsList(
 
         NewsList(
             newsFeed = newsFeed,
-            onToggleFavourite = onToggleLikeButton,
             isFavourite = isFavourite,
             onArticleTap = onSelectNews
         )
@@ -61,11 +58,11 @@ fun HomeFeedScreenWithNewsList(
 }
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewsList(
     newsFeed: NewsFeed,
-    onToggleFavourite: (String) -> Unit,
     isFavourite: Set<String>,
     onArticleTap: (String) -> Unit,
     modifier: Modifier = Modifier,
@@ -87,7 +84,7 @@ fun NewsList(
                 PopularNewsSection(
                     newsDataList = newsFeed.popularNews,
                     isFavourite = isFavourite,
-                    onFavouriteToggle = onToggleFavourite
+                    onFavouriteToggle = remember { mutableStateOf(true) }
                 )
             }
         }
@@ -104,12 +101,13 @@ fun NewsList(
                 NormalNewsSection(
                     newsData = news,
                     navigateToArticle = onArticleTap,
-                    onToggleFavourite = {}
+                    onToggleFavourite = remember { mutableStateOf(true) }
                 )
             }
 
             if (showButton == 0) {
-                RelatedNewsSection(newsData = news)
+                RelatedNewsSection(newsData = news,
+                    onToggleLikeBtn = remember { mutableStateOf(true) })
             }
             Log.d("testing", "index is $showButton")
         }

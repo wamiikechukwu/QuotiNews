@@ -17,7 +17,8 @@ import androidx.compose.ui.unit.dp
 import dev.iamwami.app.quotinews.model.News
 import dev.iamwami.app.quotinews.ui.components.LikeBtn
 import dev.iamwami.app.quotinews.ui.components.NewsImage
-import dev.iamwami.app.quotinews.ui.util.SampleNewsApiDataProvider
+import dev.iamwami.app.quotinews.ui.utils.SampleNewsApiDataProvider
+
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable

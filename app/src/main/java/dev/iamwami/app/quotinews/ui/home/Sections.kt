@@ -1,6 +1,8 @@
 package dev.iamwami.app.quotinews.ui.home
 
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -24,7 +26,6 @@ import androidx.compose.ui.unit.dp
 import dev.iamwami.app.quotinews.model.News
 import dev.iamwami.app.quotinews.ui.components.PostDivider
 import dev.iamwami.app.quotinews.ui.home.components.NewsChip
-import dev.iamwami.app.quotinews.ui.home.components.NormalNews
 import dev.iamwami.app.quotinews.ui.home.components.RelatedNews
 import dev.iamwami.app.quotinews.ui.theme.Fonts
 import dev.iamwami.app.quotinews.ui.utils.AssistChipDetails
@@ -33,9 +34,10 @@ import dev.iamwami.app.quotinews.ui.utils.AssistChipDetails
 fun PopularNewsSection(
     newsDataList: List<News>,
     isFavourite: Set<String>,
+    onFavouriteToggle: MutableState<Boolean>,
     modifier: Modifier = Modifier,
 ) {
-    Column() {
+    Column {
         Text(
             modifier = modifier.padding(vertical = 16.dp),
             text = "Popular News for you",
@@ -54,6 +56,7 @@ fun PopularNewsSection(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NormalNewsSection(
     modifier: Modifier = Modifier,

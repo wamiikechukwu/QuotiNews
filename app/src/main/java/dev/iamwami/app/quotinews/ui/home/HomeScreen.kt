@@ -12,11 +12,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.iamwami.app.quotinews.model.NewsFeed
+import dev.iamwami.app.quotinews.ui.drawer.NavigationDrawer
+import kotlinx.coroutines.launch
 
 
 /**
  *Home feed screen displaying just the article feed
  * */
+@OptIn(ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun HomeFeedScreenWithNewsList(
@@ -27,34 +30,54 @@ fun HomeFeedScreenWithNewsList(
     onRefreshNews: () -> Unit,
     onErrorDismissed: (Long) -> Unit,
     isFavourite: Set<String>,
+    currentRoute: String,
+    navigateToHome: () -> Unit,
+    navigateToBookmark: () -> Unit,
+    closeDrawer: () -> Unit,
     scaffoldState: ScaffoldState,
     modifier: Modifier = Modifier,
 
     ) {
+
+    val coroutineScope = rememberCoroutineScope()
+
     Scaffold(
         modifier = modifier,
         scaffoldState = scaffoldState,
         topBar = {
             if (showTopAppBar) {
-                TopBar(elevation = if (homeLazyListState.isScrollInProgress) 20.dp else 0.dp) {
-
-                }
+                TopBar(elevation = if (homeLazyListState.isScrollInProgress) 20.dp else 0.dp,
+                    openDrawer = {
+                        coroutineScope.launch {
+                            scaffoldState.drawerState.open()
+                        }
+                    })
             }
         },
         bottomBar = { },
         floatingActionButton = {},
-    ) { innerPadding ->
-        val innerContentModifier = modifier.padding(innerPadding)
+        drawerContent = {
+            NavigationDrawer(
+                modifier = modifier,
+                navigateToHome = { navigateToHome() },
+                navigateToBookmark = { navigateToBookmark() },
+                currentRoute = currentRoute,
+                closeDrawer = { closeDrawer() }
+            )
+        },
+        content = { innerPadding ->
+            val innerContentModifier = modifier.padding(innerPadding)
 
 //        TODO LoadingContent() should be used when the list is empty
 
 
-        NewsList(
-            newsFeed = newsFeed,
-            isFavourite = isFavourite,
-            onArticleTap = onSelectNews
-        )
-    }
+            NewsList(
+                newsFeed = newsFeed,
+                isFavourite = isFavourite,
+                onArticleTap = onSelectNews
+            )
+        }
+    )
 }
 
 

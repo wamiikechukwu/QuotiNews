@@ -93,7 +93,7 @@ fun TopBar(
         },
         navigationIcon = {
             IconButton(onClick = {
-                Toast.makeText(context, "Functionality not available", Toast.LENGTH_SHORT).show()
+                openDrawer.invoke()
             }) {
                 Icon(Icons.Outlined.Menu, contentDescription = "navigation menu")
             }

@@ -1,6 +1,8 @@
 package dev.iamwami.app.quotinews.ui.navigation
 
 import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -13,6 +15,7 @@ import dev.iamwami.app.quotinews.ui.splashscreens.NavigateToSplashScreen
 import dev.iamwami.app.quotinews.ui.utils.HomeScreen
 import dev.iamwami.app.quotinews.ui.utils.SplashScreen
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun QuotiNewsNavHost(
     navController: NavHostController,

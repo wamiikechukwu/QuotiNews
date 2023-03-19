@@ -116,7 +116,6 @@ fun NewsList(
             val showButton by remember {
                 derivedStateOf {
                     (index + 1) % 6
-
                 }
             }
 

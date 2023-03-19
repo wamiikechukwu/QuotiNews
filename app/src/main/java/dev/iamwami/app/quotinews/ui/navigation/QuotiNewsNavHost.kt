@@ -9,9 +9,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import dev.iamwami.app.quotinews.ui.bookmark.BookmarkScreen
 import dev.iamwami.app.quotinews.ui.home.HomeRoute
 import dev.iamwami.app.quotinews.ui.home.HomeViewModel
 import dev.iamwami.app.quotinews.ui.splashscreens.NavigateToSplashScreen
+import dev.iamwami.app.quotinews.ui.utils.BookmarkScreen
 import dev.iamwami.app.quotinews.ui.utils.HomeScreen
 import dev.iamwami.app.quotinews.ui.utils.SplashScreen
 
@@ -41,6 +43,9 @@ fun QuotiNewsNavHost(
                 navController = navController,
                 context = context
             )
+        }
+        composable(BookmarkScreen.route){
+            BookmarkScreen()
         }
     }
 }

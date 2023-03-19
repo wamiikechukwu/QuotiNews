@@ -15,3 +15,9 @@ object HomeScreen : QuotiNewsDestination {
         get() = "HomeScreen"
 
 }
+
+object BookmarkScreen:QuotiNewsDestination{
+    override val route: String
+        get() = "BookmarkScreen"
+
+}

@@ -19,21 +19,23 @@ import dev.iamwami.app.quotinews.ui.utils.SplashScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun QuotiNewsNavHost(
+fun QuotiNewsNavGraph(
     navController: NavHostController,
     modifier: Modifier = Modifier,
+    startDestination:String = HomeScreen.route,
     context: Context
 ) {
 
     NavHost(
         navController = navController,
-        startDestination = SplashScreen.route,
+        startDestination = startDestination,
         modifier = modifier,
     ) {
         composable(SplashScreen.route) {
             NavigateToSplashScreen(navController)
         }
         composable(HomeScreen.route) {
+
 
             val viewModel = hiltViewModel<HomeViewModel>()
 
@@ -43,6 +45,8 @@ fun QuotiNewsNavHost(
                 navController = navController,
                 context = context
             )
+
+
         }
         composable(BookmarkScreen.route){
             BookmarkScreen()

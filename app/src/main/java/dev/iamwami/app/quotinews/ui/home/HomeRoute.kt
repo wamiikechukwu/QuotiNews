@@ -8,12 +8,15 @@ import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import dev.iamwami.app.quotinews.ui.utils.HomeScreen
+import dev.iamwami.app.quotinews.navigation.BookmarkScreen
+import dev.iamwami.app.quotinews.navigation.HomeScreen
+import dev.iamwami.app.quotinews.navigation.QuotiNewsNavigation
 import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -32,8 +35,11 @@ fun HomeRoute(
     val newsFeed by homeViewModel.news.collectAsStateWithLifecycle()
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route?:HomeScreen.route
+    val currentRoute = navBackStackEntry?.destination?.route ?: HomeScreen.route
 
+    val navigationActions = remember(navController){
+        QuotiNewsNavigation(navController)
+    }
     HomeFeedScreenWithNewsList(
         newsFeed = newsFeed,
         onSelectNews = {},
@@ -44,14 +50,21 @@ fun HomeRoute(
         isFavourite = emptySet(),
         scaffoldState = scaffoldState,
         currentRoute = currentRoute,
-        navigateToBookmark = {navController.navigate(HomeScreen.route)},
-        navigateToHome = {navController.navigate(HomeScreen.route)},
+        navigateToBookmark = { navController.navigate(BookmarkScreen.route) },
+        navigateToHome = {
+            navController.navigate(HomeScreen.route) {
+//                navigationActions.navigateToHomeScreenFromNavDrawer
+                popUpTo(HomeScreen.route) {
+                    inclusive = true
+                }
+                launchSingleTop = true
+            }
+        },
         closeDrawer = {
             coroutineScope.launch {
                 scaffoldState.drawerState.close()
             }
         }
-
     )
 
 }

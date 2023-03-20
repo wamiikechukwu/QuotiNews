@@ -1,4 +1,4 @@
-package dev.iamwami.app.quotinews.ui.utils
+package dev.iamwami.app.quotinews.navigation
 
 interface QuotiNewsDestination {
     val route: String
@@ -16,7 +16,7 @@ object HomeScreen : QuotiNewsDestination {
 
 }
 
-object BookmarkScreen:QuotiNewsDestination{
+object BookmarkScreen: QuotiNewsDestination {
     override val route: String
         get() = "BookmarkScreen"
 

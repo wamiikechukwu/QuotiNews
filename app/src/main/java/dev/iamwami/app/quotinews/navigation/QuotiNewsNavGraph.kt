@@ -1,4 +1,4 @@
-package dev.iamwami.app.quotinews.ui.navigation
+package dev.iamwami.app.quotinews.navigation
 
 import android.content.Context
 import android.os.Build
@@ -13,16 +13,13 @@ import dev.iamwami.app.quotinews.ui.bookmark.BookmarkScreen
 import dev.iamwami.app.quotinews.ui.home.HomeRoute
 import dev.iamwami.app.quotinews.ui.home.HomeViewModel
 import dev.iamwami.app.quotinews.ui.splashscreens.NavigateToSplashScreen
-import dev.iamwami.app.quotinews.ui.utils.BookmarkScreen
-import dev.iamwami.app.quotinews.ui.utils.HomeScreen
-import dev.iamwami.app.quotinews.ui.utils.SplashScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun QuotiNewsNavGraph(
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    startDestination:String = HomeScreen.route,
+    startDestination:String = SplashScreen.route,
     context: Context
 ) {
 

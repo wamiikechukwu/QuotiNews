@@ -33,7 +33,6 @@ fun HomeFeedScreenWithNewsList(
     currentRoute: String,
     navigateToHome: () -> Unit,
     navigateToBookmark: () -> Unit,
-    closeDrawer: () -> Unit,
     scaffoldState: ScaffoldState,
     modifier: Modifier = Modifier,
 
@@ -62,7 +61,6 @@ fun HomeFeedScreenWithNewsList(
                 navigateToHome = { navigateToHome() },
                 navigateToBookmark = { navigateToBookmark() },
                 currentRoute = currentRoute,
-                closeDrawer = { closeDrawer() }
             )
         },
         content = { innerPadding ->

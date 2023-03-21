@@ -8,7 +8,6 @@ import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -16,8 +15,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import dev.iamwami.app.quotinews.navigation.BookmarkScreen
 import dev.iamwami.app.quotinews.navigation.HomeScreen
-import dev.iamwami.app.quotinews.navigation.QuotiNewsNavigation
-import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalLifecycleComposeApi::class)
@@ -37,9 +34,7 @@ fun HomeRoute(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route ?: HomeScreen.route
 
-    val navigationActions = remember(navController){
-        QuotiNewsNavigation(navController)
-    }
+
     HomeFeedScreenWithNewsList(
         newsFeed = newsFeed,
         onSelectNews = {},
@@ -60,11 +55,11 @@ fun HomeRoute(
                 launchSingleTop = true
             }
         },
-        closeDrawer = {
-            coroutineScope.launch {
-                scaffoldState.drawerState.close()
-            }
-        }
+//        closeDrawer = {
+//            coroutineScope.launch {
+//                scaffoldState.drawerState.close()
+//            }
+//        }
     )
 
 }

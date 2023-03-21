@@ -1,4 +1,4 @@
-package dev.iamwami.app.quotinews.util
+package dev.iamwami.app.quotinews.ui.theme
 
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily

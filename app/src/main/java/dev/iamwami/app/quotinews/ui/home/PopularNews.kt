@@ -1,8 +1,6 @@
 package dev.iamwami.app.quotinews.ui.home
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -24,12 +22,11 @@ import coil.compose.AsyncImage
 import dev.iamwami.app.quotinews.R
 import dev.iamwami.app.quotinews.model.News
 import dev.iamwami.app.quotinews.ui.theme.QuotiNewsTheme
-import dev.iamwami.app.quotinews.ui.util.SampleNewsApiDataProvider
+import dev.iamwami.app.quotinews.ui.utils.SampleNewsApiDataProvider
 
 /**
  * A single UI for the popular news card
  * */
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun PopularNews(
     modifier: Modifier = Modifier,
@@ -136,7 +133,6 @@ fun PopularNews(
 
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview()
 @Composable
 fun PreviewPopularNews(

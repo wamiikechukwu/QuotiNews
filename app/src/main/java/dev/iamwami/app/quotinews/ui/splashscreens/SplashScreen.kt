@@ -1,6 +1,5 @@
 package dev.iamwami.app.quotinews.ui.splashscreens
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -18,12 +17,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import dev.iamwami.app.quotinews.R
-import dev.iamwami.app.quotinews.ui.utils.HomeScreen
+import dev.iamwami.app.quotinews.navigation.HomeScreen
 import dev.iamwami.app.quotinews.ui.theme.Fonts
 import kotlinx.coroutines.delay
 
 @Composable
 fun NavigateToSplashScreen(navController: NavHostController) {
+
+
     var splashScreenState by rememberSaveable {
         mutableStateOf(false)
     }
@@ -33,9 +34,13 @@ fun NavigateToSplashScreen(navController: NavHostController) {
         splashScreenState = true
 
         delay(2000)
-        Log.d("testing", "$splashScreenState")
         if (splashScreenState) {
-            navController.navigate(HomeScreen.route)
+            navController.navigate(HomeScreen.route){
+                popUpTo(dev.iamwami.app.quotinews.navigation.SplashScreen.route){
+                    inclusive = true
+                }
+                launchSingleTop = true
+            }
         }
     }
     SplashScreen()

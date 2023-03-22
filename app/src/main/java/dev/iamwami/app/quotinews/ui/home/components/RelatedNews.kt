@@ -5,6 +5,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -19,7 +22,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.iamwami.app.quotinews.model.News
-import dev.iamwami.app.quotinews.ui.components.LikeButton
+import dev.iamwami.app.quotinews.ui.components.LikeBtn
 import dev.iamwami.app.quotinews.ui.components.NewsImage
 import dev.iamwami.app.quotinews.ui.components.PostDivider
 import dev.iamwami.app.quotinews.ui.utils.SampleNewsApiDataProvider
@@ -28,6 +31,7 @@ import dev.iamwami.app.quotinews.ui.utils.SampleNewsApiDataProvider
 fun RelatedNews(
     newsData: News,
     modifier: Modifier = Modifier,
+    onToggleLikeBtn: MutableState<Boolean>
 ) {
 
     Column {
@@ -54,7 +58,13 @@ fun RelatedNews(
                         text = "12-12-2022",
                         style = MaterialTheme.typography.body2,
                     )
-                    LikeButton()
+
+                    LikeBtn(
+                        onCheckedBtnState = onToggleLikeBtn.value,
+                        onToggleBtn = {
+                            onToggleLikeBtn.value = onToggleLikeBtn.value != true
+                        }
+                    )
                 }
 
                 Text(
@@ -97,5 +107,7 @@ fun RelatedNews(
 @Preview()
 @Composable
 fun RelatedNewsPreview(@PreviewParameter(SampleNewsApiDataProvider::class) data: News) {
-    RelatedNews(newsData = data)
+    RelatedNews(newsData = data,
+        onToggleLikeBtn = remember { mutableStateOf(true) }
+    )
 }

@@ -12,7 +12,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
-import dev.iamwami.app.quotinews.ui.navigation.QuotiNewsNavHost
+import dev.iamwami.app.quotinews.navigation.QuotiNewsNavGraph
 import dev.iamwami.app.quotinews.ui.theme.QuotiNewsTheme
 
 @AndroidEntryPoint
@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
 fun App() {
     val navController = rememberNavController()
 
-    QuotiNewsNavHost(
+    QuotiNewsNavGraph(
         navController = navController,
         context = LocalContext.current
     )

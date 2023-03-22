@@ -1,6 +1,8 @@
 package dev.iamwami.app.quotinews.ui.home
 
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -14,6 +16,7 @@ import androidx.compose.material3.ChipColors
 import androidx.compose.material3.ChipElevation
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
@@ -31,10 +34,10 @@ import dev.iamwami.app.quotinews.ui.utils.AssistChipDetails
 fun PopularNewsSection(
     newsDataList: List<News>,
     isFavourite: Set<String>,
-    onFavouriteToggle: (String) -> Unit,
+    onFavouriteToggle: MutableState<Boolean>,
     modifier: Modifier = Modifier,
 ) {
-    Column() {
+    Column {
         Text(
             modifier = modifier.padding(vertical = 16.dp),
             text = "Popular News for you",
@@ -53,12 +56,13 @@ fun PopularNewsSection(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NormalNewsSection(
     modifier: Modifier = Modifier,
     newsData: News,
     navigateToArticle: (String) -> Unit,
-    onToggleFavourite: () -> Unit
+    onToggleFavourite: MutableState<Boolean>
 ) {
     NormalNews(
         newsData = newsData,
@@ -89,7 +93,7 @@ fun TopBar(
         },
         navigationIcon = {
             IconButton(onClick = {
-                Toast.makeText(context, "Functionality not available", Toast.LENGTH_SHORT).show()
+                openDrawer.invoke()
             }) {
                 Icon(Icons.Outlined.Menu, contentDescription = "navigation menu")
             }
@@ -114,8 +118,13 @@ fun TopBar(
 fun RelatedNewsSection(
     newsData: News,
     modifier: Modifier = Modifier,
+    onToggleLikeBtn: MutableState<Boolean>
 ) {
-    RelatedNews(newsData = newsData)
+    RelatedNews(
+        newsData = newsData,
+        modifier = modifier,
+        onToggleLikeBtn = onToggleLikeBtn
+    )
 }
 
 /*

@@ -7,12 +7,15 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.*
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.iamwami.app.quotinews.model.NewsFeed
 import dev.iamwami.app.quotinews.ui.drawer.NavigationDrawer
+import dev.iamwami.app.quotinews.ui.screens.components.TopBar
 import kotlinx.coroutines.launch
 
 
@@ -45,12 +48,16 @@ fun HomeFeedScreenWithNewsList(
         scaffoldState = scaffoldState,
         topBar = {
             if (showTopAppBar) {
-                TopBar(elevation = if (homeLazyListState.isScrollInProgress) 20.dp else 0.dp,
+                TopBar(
+                    elevation = if (homeLazyListState.isScrollInProgress) 20.dp else 0.dp,
                     openDrawer = {
                         coroutineScope.launch {
                             scaffoldState.drawerState.open()
                         }
-                    })
+                    },
+                    topBarIcon = Icons.Outlined.Menu,
+                    topBarTitle = "Quoti News"
+                )
             }
         },
         bottomBar = { },

@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.iamwami.app.quotinews.model.News
+import dev.iamwami.app.quotinews.db.entity.NewsTable
 import dev.iamwami.app.quotinews.ui.components.LikeBtn
 import dev.iamwami.app.quotinews.ui.components.NewsImage
 import dev.iamwami.app.quotinews.ui.components.PostDivider
@@ -29,46 +29,50 @@ import dev.iamwami.app.quotinews.ui.utils.SampleNewsApiDataProvider
 
 @Composable
 fun RelatedNews(
-    newsData: News,
+    newsData: NewsTable,
     modifier: Modifier = Modifier,
     onToggleLikeBtn: MutableState<Boolean>
 ) {
 
     Column {
-        newsData.articles?.get(0)?.let {
-            Text(text = "Related News")
-            Spacer(modifier = Modifier.height(15.dp))
-            Box(contentAlignment = Alignment.BottomStart) {
 
-                NewsImage(
-                    newsData = newsData,
-                    contentDescription = "news image for related news",
-                    modifier = modifier.clip(RoundedCornerShape(5.dp))
-                )
+        Text(text = "Related News")
+        Spacer(modifier = Modifier.height(15.dp))
+        Box(contentAlignment = Alignment.BottomStart) {
 
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = modifier
-                        .fillMaxWidth()
-                        .align(alignment = Alignment.TopStart)
-                        .padding(start = 12.dp)
-                ) {
+            NewsImage(
+                newsData = newsData,
+                contentDescription = "news image for related news",
+                modifier = modifier.clip(RoundedCornerShape(5.dp))
+            )
+
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = modifier
+                    .fillMaxWidth()
+                    .align(alignment = Alignment.TopStart)
+                    .padding(start = 12.dp)
+            ) {
+                newsData.publishedAt?.let {
                     Text(
-                        text = "12-12-2022",
+                        text = it,
                         style = MaterialTheme.typography.body2,
-                    )
-
-                    LikeBtn(
-                        onCheckedBtnState = onToggleLikeBtn.value,
-                        onToggleBtn = {
-                            onToggleLikeBtn.value = onToggleLikeBtn.value != true
-                        }
                     )
                 }
 
+
+                LikeBtn(
+                    onCheckedBtnState = onToggleLikeBtn.value,
+                    onToggleBtn = {
+                        onToggleLikeBtn.value = onToggleLikeBtn.value != true
+                    }
+                )
+            }
+
+            newsData.title?.let {
                 Text(
-                    text = it.title,
+                    text = it,
                     style = TextStyle(
                         fontWeight = FontWeight.Normal,
                         fontSize = 16.sp,
@@ -90,23 +94,28 @@ fun RelatedNews(
                 )
             }
 
+        }
+
+        newsData.description?.let {
             Text(
-                text = it.description,
+                text = it,
                 style = MaterialTheme.typography.subtitle1,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 modifier = modifier.padding(top = 10.dp)
             )
-            Spacer(modifier = Modifier.height(8.dp))
-            PostDivider()
         }
+
+        Spacer(modifier = Modifier.height(8.dp))
+        PostDivider()
+
     }
 }
 
 
 @Preview()
 @Composable
-fun RelatedNewsPreview(@PreviewParameter(SampleNewsApiDataProvider::class) data: News) {
+fun RelatedNewsPreview(@PreviewParameter(SampleNewsApiDataProvider::class) data: NewsTable) {
     RelatedNews(newsData = data,
         onToggleLikeBtn = remember { mutableStateOf(true) }
     )

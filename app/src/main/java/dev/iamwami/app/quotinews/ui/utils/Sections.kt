@@ -23,6 +23,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import dev.iamwami.app.quotinews.db.entity.NewsTable
 import dev.iamwami.app.quotinews.model.News
 import dev.iamwami.app.quotinews.ui.components.PostDivider
 import dev.iamwami.app.quotinews.ui.home.components.NewsChip
@@ -32,7 +33,7 @@ import dev.iamwami.app.quotinews.ui.utils.AssistChipDetails
 
 @Composable
 fun PopularNewsSection(
-    newsDataList: List<News>,
+    newsDataList: List<NewsTable>,
     isFavourite: Set<String>,
     onFavouriteToggle: MutableState<Boolean>,
     modifier: Modifier = Modifier,
@@ -60,7 +61,7 @@ fun PopularNewsSection(
 @Composable
 fun NormalNewsSection(
     modifier: Modifier = Modifier,
-    newsData: News,
+    newsData: NewsTable,
     navigateToArticle: (String) -> Unit,
     onToggleFavourite: MutableState<Boolean>
 ) {
@@ -116,7 +117,7 @@ fun TopBar(
 * */
 @Composable
 fun RelatedNewsSection(
-    newsData: News,
+    newsData: NewsTable,
     modifier: Modifier = Modifier,
     onToggleLikeBtn: MutableState<Boolean>
 ) {

@@ -14,7 +14,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import dev.iamwami.app.quotinews.model.News
+import dev.iamwami.app.quotinews.db.entity.NewsTable
 import dev.iamwami.app.quotinews.ui.components.LikeBtn
 import dev.iamwami.app.quotinews.ui.components.NewsImage
 import dev.iamwami.app.quotinews.ui.utils.SampleNewsApiDataProvider
@@ -24,7 +24,7 @@ import dev.iamwami.app.quotinews.ui.utils.SampleNewsApiDataProvider
 @Composable
 fun NormalNews(
     modifier: Modifier = Modifier,
-    newsData: News,
+    newsData: NewsTable,
     navigateToArticle: (String) -> Unit,
     onToggleFavourite: MutableState<Boolean>,
 ) {
@@ -43,19 +43,19 @@ fun NormalNews(
                 .padding(start = 8.dp, end = 12.dp)
         )
         Column(modifier = modifier.weight(1f)) {
-            newsData.articles?.get(0)?.let {
+            newsData.title?.let {
                 Text(
-                    text = it.title,
+                    text = it,
                     style = MaterialTheme.typography.subtitle1,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                 )
             }
             Row(modifier = modifier.padding(top = 8.dp)) {
-                newsData.articles?.get(0)?.let {
+                newsData.author?.let {
                     Text(
                         style = MaterialTheme.typography.body2,
-                        text = it.author,
+                        text = it,
                     )
                 }
                 Spacer(modifier = modifier.width(24.dp))
@@ -77,9 +77,10 @@ fun NormalNews(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview()
 @Composable
-fun NewsListPreview(@PreviewParameter(SampleNewsApiDataProvider::class) data: News) {
+fun NewsListPreview(@PreviewParameter(SampleNewsApiDataProvider::class) data: NewsTable) {
     NormalNews(newsData = data,
         navigateToArticle = {},
         onToggleFavourite = remember { mutableStateOf(true) }

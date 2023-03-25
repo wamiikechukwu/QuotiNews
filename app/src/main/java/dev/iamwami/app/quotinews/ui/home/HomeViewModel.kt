@@ -3,7 +3,7 @@ package dev.iamwami.app.quotinews.ui.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.iamwami.app.quotinews.data.NewsRepository
+import dev.iamwami.app.quotinews.data.repository.NewsRepository
 import dev.iamwami.app.quotinews.model.NewsFeed
 import dev.iamwami.app.quotinews.model.mockNewsFeed
 import kotlinx.coroutines.flow.SharingStarted
@@ -26,7 +26,7 @@ class HomeViewModel @Inject constructor(
              */
             if (result.isNotEmpty()) {
                 NewsFeed(
-                    popularNews = emptyList(),
+                    popularNews = result,
                     highlightedNews = emptyList(),
                     recommendedNews = emptyList(),
                     normalNews = emptyList()

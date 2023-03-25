@@ -1,9 +1,9 @@
-package dev.iamwami.app.quotinews.network
+package dev.iamwami.app.quotinews.data.remote
 
 import dev.iamwami.app.quotinews.model.News
 import retrofit2.http.GET
 
-interface QuotiNewsApiService {
+interface ApiService {
 
     @GET("/v2/everything?q=technology")
     suspend fun getNewsByCategoryTech(): News

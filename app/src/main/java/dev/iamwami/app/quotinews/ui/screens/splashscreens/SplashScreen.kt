@@ -1,4 +1,4 @@
-package dev.iamwami.app.quotinews.ui.splashscreens
+package dev.iamwami.app.quotinews.ui.screens.splashscreens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

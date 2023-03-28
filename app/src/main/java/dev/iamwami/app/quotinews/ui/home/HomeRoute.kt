@@ -8,7 +8,6 @@ import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
@@ -21,13 +20,12 @@ import dev.iamwami.app.quotinews.navigation.HomeScreen
 @Composable
 fun HomeRoute(
     homeViewModel: HomeViewModel,
-    openDrawer: () -> Unit,
     scaffoldState: ScaffoldState = rememberScaffoldState(),
     navController: NavHostController,
-    context: Context
+    context: Context,
+    openDrawer: () -> Unit = {}
 ) {
 
-    val coroutineScope = rememberCoroutineScope()
 
     val newsFeed by homeViewModel.news.collectAsStateWithLifecycle()
 
@@ -44,6 +42,7 @@ fun HomeRoute(
         onErrorDismissed = {},
         isFavourite = emptySet(),
         scaffoldState = scaffoldState,
+        openDrawer = openDrawer,
         currentRoute = currentRoute,
         navigateToBookmark = { navController.navigate(BookmarkScreen.route) },
         navigateToHome = {

@@ -14,9 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.iamwami.app.quotinews.model.NewsFeed
-import dev.iamwami.app.quotinews.ui.drawer.NavigationDrawer
 import dev.iamwami.app.quotinews.ui.screens.components.TopBar
-import kotlinx.coroutines.launch
 
 
 /**
@@ -34,6 +32,7 @@ fun HomeFeedScreenWithNewsList(
     onErrorDismissed: (Long) -> Unit,
     isFavourite: Set<String>,
     currentRoute: String,
+    openDrawer: () -> Unit = {},
     navigateToHome: () -> Unit,
     navigateToBookmark: () -> Unit,
     scaffoldState: ScaffoldState,
@@ -41,35 +40,21 @@ fun HomeFeedScreenWithNewsList(
 
     ) {
 
-    val coroutineScope = rememberCoroutineScope()
-
     Scaffold(
         modifier = modifier,
         scaffoldState = scaffoldState,
         topBar = {
-            if (showTopAppBar) {
+//            if (showTopAppBar) {
                 TopBar(
                     elevation = if (homeLazyListState.isScrollInProgress) 20.dp else 0.dp,
-                    openDrawer = {
-                        coroutineScope.launch {
-                            scaffoldState.drawerState.open()
-                        }
-                    },
+                    openDrawer = openDrawer,
                     topBarIcon = Icons.Outlined.Menu,
                     topBarTitle = "Quoti News"
                 )
-            }
+//            }
         },
         bottomBar = { },
         floatingActionButton = {},
-        drawerContent = {
-            NavigationDrawer(
-                modifier = modifier,
-                navigateToHome = { navigateToHome() },
-                navigateToBookmark = { navigateToBookmark() },
-                currentRoute = currentRoute,
-            )
-        },
         content = { innerPadding ->
             val innerContentModifier = modifier.padding(innerPadding)
 

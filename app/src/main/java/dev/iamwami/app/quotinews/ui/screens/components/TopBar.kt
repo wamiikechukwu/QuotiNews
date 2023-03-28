@@ -21,10 +21,11 @@ import dev.iamwami.app.quotinews.ui.theme.Fonts
 fun TopBar(
     elevation: Dp,
     topBarTitle: String,
-    topBarIcon:ImageVector,
+    topBarIcon: ImageVector,
     openDrawer: () -> Unit,
 ) {
 
+//    TODO: Use CenterAlignedTopAppBar to center the items in the top bar
     val context = LocalContext.current
     TopAppBar(
         title = {
@@ -36,9 +37,7 @@ fun TopBar(
             }
         },
         navigationIcon = {
-            IconButton(onClick = {
-                openDrawer.invoke()
-            }) {
+            IconButton(onClick = openDrawer) {
                 Icon(topBarIcon, contentDescription = "navigation menu")
             }
         },

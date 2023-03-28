@@ -13,7 +13,7 @@ import androidx.navigation.compose.composable
 import dev.iamwami.app.quotinews.ui.home.HomeRoute
 import dev.iamwami.app.quotinews.ui.home.HomeViewModel
 import dev.iamwami.app.quotinews.ui.screens.bookmark.BookmarkRoute
-import dev.iamwami.app.quotinews.ui.splashscreens.NavigateToSplashScreen
+import dev.iamwami.app.quotinews.ui.screens.splashscreens.NavigateToSplashScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -21,7 +21,8 @@ fun QuotiNewsNavGraph(
     navController: NavHostController,
     modifier: Modifier = Modifier,
     startDestination: String = SplashScreen.route,
-    context: Context
+    context: Context,
+    openDrawer: () -> Unit = {}
 ) {
 
     NavHost(
@@ -39,10 +40,9 @@ fun QuotiNewsNavGraph(
 
             HomeRoute(
                 homeViewModel = viewModel,
-                openDrawer = { },
                 navController = navController,
-                context = context
-            )
+                context = context,
+                openDrawer = openDrawer           )
 
 
         }

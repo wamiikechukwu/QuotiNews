@@ -1,4 +1,4 @@
-package dev.iamwami.app.quotinews.ui.home
+package dev.iamwami.app.quotinews.ui.screens.home
 
 import androidx.compose.runtime.Composable
 import com.google.accompanist.swiperefresh.SwipeRefresh

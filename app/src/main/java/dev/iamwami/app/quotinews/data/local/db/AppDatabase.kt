@@ -1,12 +1,12 @@
-package dev.iamwami.app.quotinews.db
+package dev.iamwami.app.quotinews.data.local.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import dev.iamwami.app.quotinews.db.dao.NewsDao
-import dev.iamwami.app.quotinews.db.entity.NewsTable
+import dev.iamwami.app.quotinews.data.local.dao.NewsDao
+import dev.iamwami.app.quotinews.data.local.entity.NewsTable
 import dev.iamwami.app.quotinews.util.TypeConverter
 
 @Database(entities = [NewsTable::class], version = 1)

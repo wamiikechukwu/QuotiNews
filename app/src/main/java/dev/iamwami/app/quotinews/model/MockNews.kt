@@ -1,7 +1,7 @@
 package dev.iamwami.app.quotinews.model
 
-import dev.iamwami.app.quotinews.db.entity.NewsTable
-import dev.iamwami.app.quotinews.db.entity.Source
+import dev.iamwami.app.quotinews.data.local.entity.NewsTable
+import dev.iamwami.app.quotinews.data.local.entity.Source
 
 val news1 = NewsTable(
     id = 1,

@@ -3,7 +3,7 @@ package dev.iamwami.app.quotinews.util
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 
-import dev.iamwami.app.quotinews.db.entity.Source
+import dev.iamwami.app.quotinews.data.local.entity.Source
 
 
 class TypeConverter {

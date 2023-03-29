@@ -1,6 +1,6 @@
 package dev.iamwami.app.quotinews.model
 
-import dev.iamwami.app.quotinews.db.entity.NewsTable
+import dev.iamwami.app.quotinews.data.local.entity.NewsTable
 
 /**
  * A container of News partitioned into different categories*/

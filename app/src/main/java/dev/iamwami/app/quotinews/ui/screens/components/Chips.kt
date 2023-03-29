@@ -4,6 +4,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
+import dev.iamwami.app.quotinews.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -31,4 +32,24 @@ fun NewsChip(
         elevation = elevation,
         border = border,
     )
+}
+
+
+object AssistChipDetails {
+    data class Category(
+        val name: String,
+        val icon: Int
+    )
+
+    fun chipCategory(): List<Category> {
+        val chipMap: MutableList<Category> = mutableListOf()
+        chipMap.add(Category("Tech", R.drawable.engineering))
+        chipMap.add(Category("Edu", R.drawable.books))
+        chipMap.add(Category("Govt", R.drawable.govt))
+        chipMap.add(Category("Fashion", R.drawable.fashion))
+        chipMap.add(Category("Health", R.drawable.health))
+        chipMap.add(Category("Econs", R.drawable.stock_chart))
+
+        return chipMap.toList()
+    }
 }

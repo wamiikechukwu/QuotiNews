@@ -1,4 +1,4 @@
-package dev.iamwami.app.quotinews.ui.home
+package dev.iamwami.app.quotinews.ui.screens.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,8 +20,7 @@ import coil.compose.AsyncImage
 import dev.iamwami.app.quotinews.R
 import dev.iamwami.app.quotinews.model.News
 import dev.iamwami.app.quotinews.ui.theme.QuotiNewsTheme
-import dev.iamwami.app.quotinews.ui.utils.SampleNewsApiDataProvider
-import dev.iamwami.app.quotinews.util.dateFormatter
+import dev.iamwami.app.quotinews.util.SampleNewsApiDataProvider
 
 @Composable
 fun HighLightedNews(

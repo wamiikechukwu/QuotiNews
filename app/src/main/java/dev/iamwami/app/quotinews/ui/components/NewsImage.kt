@@ -8,7 +8,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import coil.compose.AsyncImage
 import dev.iamwami.app.quotinews.R
-import dev.iamwami.app.quotinews.db.entity.NewsTable
+import dev.iamwami.app.quotinews.data.local.entity.NewsTable
 
 //TODO find the best way to work around passing modifier as an arguement.
 

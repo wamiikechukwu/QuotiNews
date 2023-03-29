@@ -1,4 +1,4 @@
-package dev.iamwami.app.quotinews.ui.home
+package dev.iamwami.app.quotinews.ui.screens.home
 
 import android.util.Log
 import androidx.compose.foundation.layout.*
@@ -20,9 +20,9 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import dev.iamwami.app.quotinews.R
-import dev.iamwami.app.quotinews.db.entity.NewsTable
+import dev.iamwami.app.quotinews.data.local.entity.NewsTable
 import dev.iamwami.app.quotinews.ui.theme.QuotiNewsTheme
-import dev.iamwami.app.quotinews.ui.utils.SampleNewsApiDataProvider
+import dev.iamwami.app.quotinews.util.SampleNewsApiDataProvider
 
 /**
  * A single UI for the popular news card

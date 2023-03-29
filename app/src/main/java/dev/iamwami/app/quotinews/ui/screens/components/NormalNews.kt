@@ -14,10 +14,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import dev.iamwami.app.quotinews.db.entity.NewsTable
+import dev.iamwami.app.quotinews.data.local.entity.NewsTable
 import dev.iamwami.app.quotinews.ui.components.LikeBtn
 import dev.iamwami.app.quotinews.ui.components.NewsImage
-import dev.iamwami.app.quotinews.ui.utils.SampleNewsApiDataProvider
+import dev.iamwami.app.quotinews.util.SampleNewsApiDataProvider
 
 
 @RequiresApi(Build.VERSION_CODES.O)

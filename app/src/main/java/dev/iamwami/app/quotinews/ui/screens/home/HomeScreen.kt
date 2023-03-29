@@ -1,4 +1,4 @@
-package dev.iamwami.app.quotinews.ui.home
+package dev.iamwami.app.quotinews.ui.screens.home
 
 import android.os.Build
 import android.util.Log
@@ -14,6 +14,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.iamwami.app.quotinews.model.NewsFeed
+import dev.iamwami.app.quotinews.ui.home.NewsChipCategory
+import dev.iamwami.app.quotinews.ui.home.NormalNewsSection
+import dev.iamwami.app.quotinews.ui.home.PopularNewsSection
+import dev.iamwami.app.quotinews.ui.home.RelatedNewsSection
 import dev.iamwami.app.quotinews.ui.screens.components.TopBar
 
 

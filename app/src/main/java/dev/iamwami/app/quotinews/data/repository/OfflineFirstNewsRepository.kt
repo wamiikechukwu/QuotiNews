@@ -1,9 +1,9 @@
 package dev.iamwami.app.quotinews.data.repository
 
 import dev.iamwami.app.quotinews.data.remote.ApiService
-import dev.iamwami.app.quotinews.db.dao.NewsDao
-import dev.iamwami.app.quotinews.db.entity.NewsTable
-import dev.iamwami.app.quotinews.db.entity.Source
+import dev.iamwami.app.quotinews.data.local.dao.NewsDao
+import dev.iamwami.app.quotinews.data.local.entity.NewsTable
+import dev.iamwami.app.quotinews.data.local.entity.Source
 import dev.iamwami.app.quotinews.util.ResultWrapper
 import dev.iamwami.app.quotinews.util.safeApiCall
 import kotlinx.coroutines.CoroutineDispatcher

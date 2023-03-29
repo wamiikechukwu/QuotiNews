@@ -19,11 +19,12 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import dev.iamwami.app.quotinews.db.entity.NewsTable
+import dev.iamwami.app.quotinews.data.local.entity.NewsTable
 import dev.iamwami.app.quotinews.ui.components.PostDivider
+import dev.iamwami.app.quotinews.ui.home.components.AssistChipDetails
 import dev.iamwami.app.quotinews.ui.home.components.NewsChip
 import dev.iamwami.app.quotinews.ui.home.components.RelatedNews
-import dev.iamwami.app.quotinews.ui.utils.AssistChipDetails
+import dev.iamwami.app.quotinews.ui.screens.home.PopularNews
 
 @Composable
 fun PopularNewsSection(

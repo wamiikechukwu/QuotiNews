@@ -1,4 +1,4 @@
-package dev.iamwami.app.quotinews.db.entity
+package dev.iamwami.app.quotinews.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

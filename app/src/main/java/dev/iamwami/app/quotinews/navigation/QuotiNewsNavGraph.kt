@@ -10,9 +10,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import dev.iamwami.app.quotinews.ui.screens.bookmark.BookmarkRoute
 import dev.iamwami.app.quotinews.ui.screens.home.HomeRoute
 import dev.iamwami.app.quotinews.ui.screens.home.HomeViewModel
-import dev.iamwami.app.quotinews.ui.screens.bookmark.BookmarkRoute
 import dev.iamwami.app.quotinews.ui.screens.splashscreens.NavigateToSplashScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -42,7 +42,8 @@ fun QuotiNewsNavGraph(
                 homeViewModel = viewModel,
                 navController = navController,
                 context = context,
-                openDrawer = openDrawer           )
+                openDrawer = openDrawer
+            )
 
 
         }
@@ -51,6 +52,7 @@ fun QuotiNewsNavGraph(
                 navController = navController,
                 homeLazyListState = rememberLazyListState(),
                 modifier = Modifier,
+                openDrawer = openDrawer
             )
         }
     }

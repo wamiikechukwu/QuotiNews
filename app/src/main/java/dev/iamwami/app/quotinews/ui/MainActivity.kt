@@ -2,7 +2,6 @@ package dev.iamwami.app.quotinews.ui
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
@@ -55,7 +54,6 @@ fun QuotiNewsApp() {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route ?: SplashScreen.route
 
-    Log.d("testingNavDrawer", "MainActivity.kt: ${coroutineScope.coroutineContext} ")
     ModalNavigationDrawer(
         drawerContent = {
             NavigationDrawer(

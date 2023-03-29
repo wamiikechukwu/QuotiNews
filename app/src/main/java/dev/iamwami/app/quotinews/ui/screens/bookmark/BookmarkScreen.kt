@@ -12,21 +12,24 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import dev.iamwami.app.quotinews.R
 import dev.iamwami.app.quotinews.ui.screens.components.TopBar
 
-// create a composable function called BookmarkRoute and call BookmarkScreen inside it
 @Composable
 fun BookmarkRoute(
     modifier: Modifier = Modifier,
     homeLazyListState: LazyListState,
-    navController: NavHostController
+    navController: NavHostController,
+    openDrawer: () -> Unit = {},
 ) {
     BookmarkScreen(
         modifier = modifier,
         homeLazyListState = homeLazyListState,
-        navController = navController
+        navController = navController,
+        openDrawer = { openDrawer() }
     )
 }
 
@@ -36,14 +39,16 @@ fun BookmarkRoute(
 fun BookmarkScreen(
     modifier: Modifier = Modifier,
     homeLazyListState: LazyListState,
-    navController: NavHostController
+    navController: NavHostController,
+    openDrawer: () -> Unit = {},
 ) {
     Scaffold(modifier = modifier,
         topBar = {
             TopBar(elevation = if (homeLazyListState.isScrollInProgress) 20.dp else 0.dp,
-                topBarTitle = "BookMarks",
+                topBarTitle = stringResource(R.string.bookmark),
                 topBarIcon = Icons.Outlined.Menu,
-                openDrawer = { })
+                openDrawer = { openDrawer() }
+            )
         },
         content = { innerPadding ->
             BookmarkContent(
@@ -54,20 +59,12 @@ fun BookmarkScreen(
             )
         }
     )
-
-
 }
 
-//create a composable function called BookmarkContent and call BookmarkList inside it
 @Composable
 fun BookmarkContent(
     modifier: Modifier
 ) {
-    BookmarkList(modifier)
-}
-
-@Composable
-fun BookmarkList(modifier: Modifier) {
     Column(modifier) {
     }
 }

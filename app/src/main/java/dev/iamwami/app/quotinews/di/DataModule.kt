@@ -4,8 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dev.iamwami.app.quotinews.data.NewsRepository
-import dev.iamwami.app.quotinews.data.OfflineFirstNewsRepository
+import dev.iamwami.app.quotinews.data.repository.NewsRepository
+import dev.iamwami.app.quotinews.data.repository.OfflineFirstNewsRepository
 
 @Module
 @InstallIn(SingletonComponent::class)

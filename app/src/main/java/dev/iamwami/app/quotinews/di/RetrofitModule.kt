@@ -1,5 +1,6 @@
 package dev.iamwami.app.quotinews.di
 
+import android.util.Log
 import dagger.Lazy
 import dagger.Module
 import dagger.Provides
@@ -34,6 +35,7 @@ object RetrofitModule {
         request = request.newBuilder()
             .addHeader("X-Api-Key", apiKey)
             .build()
+        Log.d("testing", "apikey: $apiKey")
 
         val response = chain.proceed(request)
         response

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">QuotiNews</string>
     <string name="bookmark">BookMarks</string>
+    <string name="popular_news_for_you">Popular News for you</string>
 </resources>

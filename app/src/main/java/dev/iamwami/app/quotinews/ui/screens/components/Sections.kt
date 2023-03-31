@@ -18,7 +18,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import dev.iamwami.app.quotinews.R
 import dev.iamwami.app.quotinews.data.local.entity.NewsTable
 import dev.iamwami.app.quotinews.ui.components.PostDivider
 import dev.iamwami.app.quotinews.ui.home.components.AssistChipDetails
@@ -36,7 +38,7 @@ fun PopularNewsSection(
     Column {
         Text(
             modifier = modifier.padding(vertical = 16.dp),
-            text = "Popular News for you",
+            text = stringResource(R.string.popular_news_for_you),
             style = MaterialTheme.typography.subtitle1
         )
         LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp)) {

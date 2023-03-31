@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import dev.iamwami.app.quotinews.R
 import dev.iamwami.app.quotinews.data.local.entity.NewsTable
-import dev.iamwami.app.quotinews.ui.theme.QuotiNewsTheme
 import dev.iamwami.app.quotinews.util.SampleNewsApiDataProvider
 
 /**
@@ -59,81 +58,81 @@ fun PopularNews(
                 maxLines = 1
             )
         }
-    }
+
 //        News description
-    newsData.description?.let {
-        Text(
-            text = it,
-            style = MaterialTheme.typography.body2,
-            overflow = TextOverflow.Ellipsis,
-            maxLines = 2,
-        )
-    }
-
-//        Icons row
-    Row(
-        modifier = modifier
-            .padding(top = 16.dp)
-            .fillMaxWidth(),
-        verticalAlignment = Alignment.Bottom,
-    ) {
-//            For the new publisher name and date published
-        Row {
-            newsData.author?.let {
-                Text(
-                    text = it,
-                    style = MaterialTheme.typography.body2,
-                    overflow = TextOverflow.Ellipsis, maxLines = 1
-                )
-            }
-            Spacer(modifier = modifier.width(8.dp))
-
-            newsData.publishedAt?.let {
-                Text(
-                    text = it,
-                    style = MaterialTheme.typography.body2,
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 1
-                )
-            }
-
+        newsData.description?.let {
+            Text(
+                text = it,
+                style = MaterialTheme.typography.body2,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 2,
+            )
         }
 
-        Spacer(modifier = modifier.width(16.dp))
+//        Icons row
+        Row(
+            modifier = modifier
+                .padding(top = 16.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.Bottom,
+        ) {
+//            For the new publisher name and date published
+            Row {
+                newsData.author?.let {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.body2,
+                        overflow = TextOverflow.Ellipsis, maxLines = 1
+                    )
+                }
+                Spacer(modifier = modifier.width(8.dp))
+
+                newsData.publishedAt?.let {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.body2,
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 1
+                    )
+                }
+
+            }
+
+            Spacer(modifier = modifier.width(16.dp))
 
 //            For the like and share and option menu icon
-        Row {
+            Row {
 
-            IconToggleButton(
-                checked = isIconBookmarked,
-                onCheckedChange = { iconClicked() },
-                modifier = modifier.height(20.dp)
+                IconToggleButton(
+                    checked = isIconBookmarked,
+                    onCheckedChange = { iconClicked() },
+                    modifier = modifier.height(20.dp)
 //                    onClick = {
 //                        Log.d("icon_buttons", "This is bookmarked")
 //                    }
-            ) {
-                Icon(if (isIconBookmarked) Icons.Outlined.FavoriteBorder else Icons.Filled.FavoriteBorder, contentDescription = "Heart icon for favourite news")
-            }
-            IconButton(
-                onClick = {
-                    Log.d("icon_buttons", "This is shared")
+                ) {
+                    Icon(if (isIconBookmarked) Icons.Outlined.FavoriteBorder else Icons.Filled.FavoriteBorder, contentDescription = "Heart icon for favourite news")
+                }
+                IconButton(
+                    onClick = {
+                        Log.d("icon_buttons", "This is shared")
 
-                }, modifier = modifier.height(20.dp)
-            ) {
-                Icon(Icons.Filled.Share, contentDescription = "Share icon to share the news")
-            }
-            IconButton(
-                onClick = {
-                    Log.d("icon_buttons", "checked other options")
+                    }, modifier = modifier.height(20.dp)
+                ) {
+                    Icon(Icons.Filled.Share, contentDescription = "Share icon to share the news")
+                }
+                IconButton(
+                    onClick = {
+                        Log.d("icon_buttons", "checked other options")
 
-                }, modifier = modifier.height(20.dp)
-            ) {
-                Icon(Icons.Filled.MoreVert, contentDescription = "Option menu")
+                    }, modifier = modifier.height(20.dp)
+                ) {
+                    Icon(Icons.Filled.MoreVert, contentDescription = "Option menu")
+                }
             }
         }
     }
 }
-
 
 @Preview()
 @Composable
@@ -142,12 +141,10 @@ fun PreviewPopularNews(
         SampleNewsApiDataProvider::class, 1
     ) data: NewsTable
 ) {
-    QuotiNewsTheme {
-        Surface() {
-            PopularNews(newsData = data,
-                isIconBookmarked = false,
-                iconClicked = {})
-        }
-    }
+
+    PopularNews(newsData = data,
+        isIconBookmarked = false,
+        iconClicked = {})
+
 }
 

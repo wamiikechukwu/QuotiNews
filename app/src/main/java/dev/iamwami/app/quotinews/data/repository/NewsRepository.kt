@@ -7,6 +7,8 @@ interface NewsRepository {
 
     fun getLatestNews() : Flow<List<NewsTable>>
 
-    suspend fun requestNews()
+    suspend fun requestNewsToLocalDb()
+
+
 
 }

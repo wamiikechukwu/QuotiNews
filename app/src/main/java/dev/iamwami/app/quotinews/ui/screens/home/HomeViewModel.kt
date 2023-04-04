@@ -40,7 +40,6 @@ class HomeViewModel @Inject constructor(
         )
 
     fun refreshNews() = viewModelScope.launch {
-        newsRepository.requestNews()
+        newsRepository.requestNewsToLocalDb()
     }
-
 }

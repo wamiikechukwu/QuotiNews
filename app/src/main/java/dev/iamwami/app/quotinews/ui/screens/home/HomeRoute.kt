@@ -4,30 +4,40 @@ import android.content.Context
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
+import coil.compose.AsyncImage
+import dev.iamwami.app.quotinews.R
 import dev.iamwami.app.quotinews.model.NewsFeed
 import dev.iamwami.app.quotinews.ui.home.NewsChipCategory
 import dev.iamwami.app.quotinews.ui.home.NormalNewsSection
 import dev.iamwami.app.quotinews.ui.home.PopularNewsSection
 import dev.iamwami.app.quotinews.ui.home.RelatedNewsSection
 import dev.iamwami.app.quotinews.ui.screens.components.TopBar
+import dev.iamwami.app.quotinews.ui.theme.Fonts
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalLifecycleComposeApi::class)
@@ -40,7 +50,7 @@ fun HomeRoute(
     openDrawer: () -> Unit = {}
 ) {
 
-    val newsFeed by homeViewModel.news.collectAsStateWithLifecycle()
+    val newsFeed by homeViewModel.newsFromDB.collectAsStateWithLifecycle()
 
     HomeScreen(
         newsFeed = newsFeed,
@@ -73,7 +83,6 @@ fun HomeScreen(
     scaffoldState: ScaffoldState,
 
     ) {
-
     Scaffold(
         modifier = modifier,
         scaffoldState = scaffoldState,

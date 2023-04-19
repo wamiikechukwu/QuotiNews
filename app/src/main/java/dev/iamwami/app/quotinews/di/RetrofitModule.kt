@@ -25,6 +25,7 @@ object RetrofitModule {
 
     private val apiKey: String
         get() = BuildConfig.API_KEY
+//        get() = ""
 
     private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
@@ -42,10 +43,10 @@ object RetrofitModule {
     }
 
     @Provides
-    fun providesDispatcher() : CoroutineDispatcher = Dispatchers.IO
+    fun providesDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
     @Provides
-    fun providesOkHttpClient() : OkHttpClient = OkHttpClient
+    fun providesOkHttpClient(): OkHttpClient = OkHttpClient
         .Builder()
         .callTimeout(10, TimeUnit.SECONDS)
         .addInterceptor(headerInterceptor)
@@ -56,7 +57,7 @@ object RetrofitModule {
     @Singleton
     fun providesRetrofit(
         client: Lazy<OkHttpClient>
-    ) : Retrofit = Retrofit
+    ): Retrofit = Retrofit
         .Builder()
         .addConverterFactory(GsonConverterFactory.create())
         .baseUrl(BASE_URL)

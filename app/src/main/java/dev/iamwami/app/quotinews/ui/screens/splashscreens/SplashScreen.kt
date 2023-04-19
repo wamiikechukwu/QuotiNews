@@ -69,7 +69,7 @@ fun SplashScreen(
             stringResource(id = R.string.app_name),
             fontSize = 30.sp,
             textAlign = TextAlign.Center,
-            fontFamily = Fonts.syneFontFamily,
+                fontFamily = Fonts.syneFontFamily,
             modifier = modifier.padding(bottom = 16.dp)
         )
         Text(

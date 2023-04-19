@@ -1,6 +1,7 @@
 package dev.iamwami.app.quotinews.data.repository
 
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import dev.iamwami.app.quotinews.data.local.dao.NewsDao
 import dev.iamwami.app.quotinews.data.local.entity.NewsTable
@@ -21,29 +22,12 @@ class OfflineFirstNewsRepository @Inject constructor(
     private val coroutineDispatcher: CoroutineDispatcher
 ) : NewsRepository {
 
-    override fun getLatestNews(): Flow<List<NewsTable>> = newsDao.fetchAllNews()
-        .map { localData ->
-            localData.map { news ->
-                NewsTable(
-                    id = 1,
-                    source = Source(
-                        id = news.source.id,
-                        name = news.source.name
-                    ), urlToImage = news.urlToImage,
-                    title = news.title,
-                    author = news.author,
-                    description = news.description,
-                    url = news.url,
-                    publishedAt = news.publishedAt,
-                    content = news.content
-                )
-            }
-        }
+    override fun getNewsFromDB() = newsDao.fetchAllNews()
         .onStart { requestNewsToLocalDb() }
 
 
-    override suspend fun requestNewsToLocalDb(){
-        val uiState:MutableState<ResultWrapper<News>> = mutableStateOf( ResultWrapper.Loading())
+    override suspend fun requestNewsToLocalDb() {
+        val uiState: MutableState<ResultWrapper<News>> = mutableStateOf(ResultWrapper.Loading())
 
         safeApiCall(
             coroutineDispatcher,

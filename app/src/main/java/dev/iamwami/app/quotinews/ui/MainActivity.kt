@@ -11,10 +11,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.rememberDrawerState
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -101,11 +98,14 @@ fun QuotiNewsApp() {
                     modifier = Modifier.padding(top = 20.dp),
                     fontSize = 20.sp,
                 )
+
+                Spacer(modifier = Modifier.height(20.dp))
+                Button(onClick = { /*TODO*/ }){
+                    Text(text = "Retry")
+                }
             }
-        },
-        loading = true,
-        onRefresh = {
-            Log.d("testing", "refreshing for news")
+
+
         },
         content = {
             ModalNavigationDrawer(

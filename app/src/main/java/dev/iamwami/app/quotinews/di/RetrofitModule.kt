@@ -24,8 +24,8 @@ object RetrofitModule {
     private const val BASE_URL = "https://newsapi.org/"
 
     private val apiKey: String
-        get() = BuildConfig.API_KEY
-//        get() = ""
+//        get() = BuildConfig.API_KEY
+        get() = "883fcfd667104a34ac74c1827fb419e4"
 
     private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 

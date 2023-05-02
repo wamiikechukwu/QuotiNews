@@ -6,7 +6,6 @@ plugins {
 }
 apply plugin: 'kotlin-kapt'
 
-
 android {
     compileSdk 33
 
@@ -24,7 +23,8 @@ android {
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
 
-        buildConfigField "String", "API_KEY", "\"${properties.getProperty("NEWS_API_KEY")}\""
+        buildConfigField "String", "API_KEY", "\"${properties.getProperty("apikey")}\""
+
     }
 
     buildTypes {

@@ -44,8 +44,8 @@ val news3 = NewsTable(
         id = "3",
         name = "BBC News"
     ),
-    urlToImage = "https://ichef.bbci.co.uk/news/976/cpsprodpb/1806E/production/_129141489_b616de5c386c3b3309303e688ac04afdebb86dbd0_23_1357_13571000x1000.jpg.webp",
-    title = "Nigeria is one kind of country",
+    urlToImage = "https://cdn01.dailycaller.com/wp-content/uploads/2023/03/GettyImages-1250089712-scaled-e1680282180586.jpg",
+    title = "Hey there i am just a text place holder",
     author = "Vivian",
     description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
     url = "https://appwrite.io/images-ee/1.0/Cover.png",
@@ -59,8 +59,8 @@ val news4 = NewsTable(
         id = "4",
         name = "BBC News"
     ),
-    urlToImage = "https://ichef.bbci.co.uk/news/976/cpsprodpb/1806E/production/_129141489_b616de5c386c3b3309303e688ac04afdebb86dbd0_23_1357_13571000x1000.jpg.webp",
-    title = "Nigeria is one kind of country",
+    urlToImage = "https://bgr.com/wp-content/uploads/2021/12/Tesla-Cars.jpg?quality=82&strip=all",
+    title = "Lorem Ipsum is simply dummy text of the printing and typesetting",
     author = "Vivian",
     description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
     url = "https://appwrite.io/images-ee/1.0/Cover.png",

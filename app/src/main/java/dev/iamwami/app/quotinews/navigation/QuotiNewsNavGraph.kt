@@ -7,12 +7,14 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import dev.iamwami.app.quotinews.ui.screens.bookmark.BookmarkRoute
 import dev.iamwami.app.quotinews.ui.screens.home.HomeRoute
 import dev.iamwami.app.quotinews.ui.screens.home.HomeViewModel
+import dev.iamwami.app.quotinews.ui.screens.home.LoadingContent
 import dev.iamwami.app.quotinews.ui.screens.splashscreens.NavigateToSplashScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -20,6 +22,7 @@ import dev.iamwami.app.quotinews.ui.screens.splashscreens.NavigateToSplashScreen
 fun QuotiNewsNavGraph(
     navController: NavHostController,
     modifier: Modifier = Modifier,
+    homeViewModel :HomeViewModel,
     startDestination: String = SplashScreen.route,
     context: Context,
     openDrawer: () -> Unit = {}
@@ -36,10 +39,9 @@ fun QuotiNewsNavGraph(
         composable(HomeScreen.route) {
 
 
-            val viewModel = hiltViewModel<HomeViewModel>()
 
             HomeRoute(
-                homeViewModel = viewModel,
+                homeViewModel = homeViewModel,
                 navController = navController,
                 context = context,
                 openDrawer = openDrawer
